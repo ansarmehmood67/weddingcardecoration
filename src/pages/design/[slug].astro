@@ -1,0 +1,453 @@
+---
+import { getProductBySlug, getAllProductSlugs, products } from '../../data/products';
+
+export async function getStaticPaths() {
+  const slugs = getAllProductSlugs();
+  return slugs.map((slug) => ({
+    params: { slug },
+  }));
+}
+
+const { slug } = Astro.params;
+const product = getProductBySlug(slug || '');
+
+if (!product) {
+  return Astro.redirect('/404');
+}
+
+const siteUrl = 'https://weddingroomdecoration.com';
+const phoneNumber = '+923227555459';
+const whatsappNumber = '923227555459';
+const whatsappMessage = encodeURIComponent(`Hi! I'm interested in ${product.title} (Rs ${product.price.toLocaleString()}). Can you help me?`);
+const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+
+// Product Schema for JSON-LD
+const productSchema = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": product.title,
+  "description": product.description,
+  "image": `${siteUrl}${product.image}`,
+  "brand": {
+    "@type": "Brand",
+    "name": "Lahore Blooms"
+  },
+  "offers": {
+    "@type": "Offer",
+    "url": `${siteUrl}/design/${product.slug}`,
+    "priceCurrency": "PKR",
+    "price": product.price.toString(),
+    "priceValidUntil": new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+    "availability": "https://schema.org/InStock",
+    "seller": {
+      "@type": "LocalBusiness",
+      "name": "Lahore Blooms",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Lahore",
+        "addressRegion": "Punjab",
+        "addressCountry": "PK"
+      }
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "Lahore"
+    }
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "5.0",
+    "reviewCount": "2"
+  }
+};
+
+// Breadcrumb Schema
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": siteUrl
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Designs",
+      "item": `${siteUrl}#packages`
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": product.title,
+      "item": `${siteUrl}/design/${product.slug}`
+    }
+  ]
+};
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content={product.metaDescription}>
+  <meta name="keywords" content={product.keywords.join(', ')}>
+  <link rel="canonical" href={`${siteUrl}/design/${product.slug}`}>
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="product">
+  <meta property="og:url" content={`${siteUrl}/design/${product.slug}`}>
+  <meta property="og:title" content={`${product.title} | Lahore Blooms`}>
+  <meta property="og:description" content={product.metaDescription}>
+  <meta property="og:image" content={`${siteUrl}${product.image}`}>
+  <meta property="product:price:amount" content={product.price.toString()}>
+  <meta property="product:price:currency" content="PKR">
+  
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content={`${siteUrl}/design/${product.slug}`}>
+  <meta property="twitter:title" content={`${product.title} | Lahore Blooms`}>
+  <meta property="twitter:description" content={product.metaDescription}>
+  <meta property="twitter:image" content={`${siteUrl}${product.image}`}>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+  <link rel="manifest" href="/site.webmanifest">
+  
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- DNS Prefetch for external domains -->
+  <link rel="dns-prefetch" href="https://wa.me">
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+  
+  <title>{product.title} | Wedding Room Decoration Lahore | Lahore Blooms</title>
+  
+  <!-- JSON-LD Schemas -->
+  <script type="application/ld+json" set:html={JSON.stringify(productSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-white text-gray-900 antialiased">
+  
+  <!-- Header - Desktop -->
+  <header class="hidden md:flex sticky top-0 z-50 bg-white/95 backdrop-blur-sm shadow-sm border-b border-gray-100">
+    <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <a href="/" class="text-2xl font-bold bg-gradient-to-r from-pink-600 to-rose-600 bg-clip-text text-transparent">
+          Lahore Blooms
+        </a>
+        <span class="text-xs text-gray-500 font-medium">Wedding Room Decoration in Lahore</span>
+      </div>
+      <nav class="hidden lg:flex items-center gap-6">
+        <a href="/#packages" class="text-gray-700 hover:text-pink-600 transition-colors font-medium text-sm">Designs</a>
+        <a href="/#services" class="text-gray-700 hover:text-pink-600 transition-colors font-medium text-sm">Services</a>
+        <a href="/#ideas" class="text-gray-700 hover:text-pink-600 transition-colors font-medium text-sm">Ideas</a>
+        <a href="/#how-it-works" class="text-gray-700 hover:text-pink-600 transition-colors font-medium text-sm">How It Works</a>
+        <a href="/#reviews" class="text-gray-700 hover:text-pink-600 transition-colors font-medium text-sm">Reviews</a>
+        <a href="/#faq" class="text-gray-700 hover:text-pink-600 transition-colors font-medium text-sm">FAQ</a>
+        <a href={`tel:${phoneNumber}`} class="text-gray-700 hover:text-pink-600 transition-colors font-medium text-sm">{phoneNumber}</a>
+        <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full font-semibold text-sm transition-colors flex items-center gap-2">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          WhatsApp
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Header - Mobile -->
+  <header class="md:hidden sticky top-0 z-50 bg-white shadow-sm border-b border-gray-100">
+    <div class="px-4 py-3 flex items-center justify-between">
+      <a href="/" class="text-xl font-bold bg-gradient-to-r from-pink-600 to-rose-600 bg-clip-text text-transparent">
+        Lahore Blooms
+      </a>
+      <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="bg-green-500 hover:bg-green-600 text-white p-2 rounded-full transition-colors">
+        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+      </a>
+    </div>
+  </header>
+
+  <!-- Mobile Sticky Bottom Bar -->
+  <div class="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-gray-200 shadow-lg">
+    <div class="flex">
+      <a href={`tel:${phoneNumber}`} class="flex-1 py-4 px-4 text-center font-semibold text-gray-700 hover:bg-gray-50 transition-colors flex items-center justify-center gap-2">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+        Call
+      </a>
+      <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="flex-1 py-4 px-4 text-center font-semibold bg-green-500 text-white hover:bg-green-600 transition-colors flex items-center justify-center gap-2">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        WhatsApp
+      </a>
+    </div>
+  </div>
+
+  <!-- Breadcrumb -->
+  <nav class="bg-gray-50 py-3 px-4">
+    <div class="container mx-auto max-w-6xl">
+      <div class="flex items-center gap-2 text-sm text-gray-600">
+        <a href="/" class="hover:text-pink-600 transition-colors">Home</a>
+        <span>/</span>
+        <a href="/#packages" class="hover:text-pink-600 transition-colors">Designs</a>
+        <span>/</span>
+        <span class="text-gray-900">{product.title}</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Product Detail Section -->
+  <section class="py-8 md:py-16 px-4">
+    <div class="container mx-auto max-w-6xl">
+      <div class="grid md:grid-cols-2 gap-8 md:gap-12">
+        <!-- Product Image -->
+        <div class="aspect-square rounded-2xl overflow-hidden shadow-xl bg-gray-100">
+          <img 
+            src={product.image} 
+            alt={product.title}
+            class="w-full h-full object-cover"
+            loading="eager"
+            width="600"
+            height="600"
+          />
+        </div>
+
+        <!-- Product Info -->
+        <div>
+          <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{product.title}</h1>
+          <div class="flex items-center gap-4 mb-6">
+            <div class="text-4xl font-bold text-pink-600">Rs {product.price.toLocaleString()}</div>
+            <div class="flex items-center gap-1">
+              <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <span class="text-gray-700 font-medium">5.0 (2 reviews)</span>
+            </div>
+          </div>
+
+          <div class="prose prose-lg max-w-none mb-8 text-gray-700">
+            <p>{product.description}</p>
+          </div>
+
+          <div class="mb-8">
+            <h2 class="text-xl font-bold text-gray-900 mb-4">What's Included:</h2>
+            <ul class="space-y-2">
+              {product.features.map((feature) => (
+                <li class="flex items-start gap-2">
+                  <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                  <span class="text-gray-700">{feature}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="flex flex-col sm:flex-row gap-4">
+            <button 
+              type="button"
+              data-product-slug={product.slug}
+              data-product-title={product.title}
+              data-product-price={product.price}
+              class="order-now-btn flex-1 bg-pink-600 hover:bg-pink-700 text-white px-8 py-4 rounded-full font-semibold text-lg transition-colors flex items-center justify-center gap-2 shadow-lg"
+            >
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+              Order Now
+            </button>
+            <a 
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex-1 bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-full font-semibold text-lg transition-colors flex items-center justify-center gap-2 shadow-lg"
+            >
+              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+              WhatsApp Inquiry
+            </a>
+          </div>
+
+          <div class="mt-6 p-4 bg-pink-50 rounded-lg">
+            <p class="text-sm text-gray-700">
+              <strong>Note:</strong> Price may vary based on room size and customization. Pay after decoration service available. Same-day service subject to availability.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Related Products -->
+  <section class="py-16 px-4 bg-gray-50">
+    <div class="container mx-auto max-w-6xl">
+      <h2 class="text-3xl font-bold text-center mb-8 text-gray-900">Other Designs You Might Like</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        {products.filter(p => p.slug !== product.slug).slice(0, 3).map((relatedProduct) => (
+          <a href={`/design/${relatedProduct.slug}`} class="bg-white rounded-xl overflow-hidden shadow-lg border border-gray-100 hover:shadow-xl transition-all">
+            <div class="aspect-square overflow-hidden bg-gray-100">
+              <img 
+                src={relatedProduct.image} 
+                alt={relatedProduct.title}
+                class="w-full h-full object-cover"
+                loading="lazy"
+                width="400"
+                height="400"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="text-lg font-bold text-gray-900 mb-2 line-clamp-2">{relatedProduct.title}</h3>
+              <div class="text-xl font-bold text-pink-600">Rs {relatedProduct.price.toLocaleString()}</div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Order Modal (same as index page) -->
+  <div id="order-modal" class="hidden fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+    <div class="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+      <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" onclick="window.closeOrderModal()"></div>
+      <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+      <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+        <form id="order-form" onsubmit="window.submitOrder(event)" class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+          <div class="sm:flex sm:items-start">
+            <div class="mt-3 text-center sm:mt-0 sm:text-left w-full">
+              <h3 class="text-2xl font-bold text-gray-900 mb-4" id="modal-title">Order Wedding Room Decoration</h3>
+              <div class="mb-4">
+                <p class="text-lg font-semibold text-pink-600" id="modal-product-title"></p>
+                <p class="text-gray-600" id="modal-product-price"></p>
+              </div>
+              <input type="hidden" id="order-design" name="design" />
+              <div class="space-y-4">
+                <div>
+                  <label for="order-name" class="block text-sm font-medium text-gray-700 mb-1">Name *</label>
+                  <input type="text" id="order-name" name="name" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-pink-500 focus:border-pink-500" />
+                </div>
+                <div>
+                  <label for="order-phone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number *</label>
+                  <input type="tel" id="order-phone" name="phone" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-pink-500 focus:border-pink-500" />
+                </div>
+                <div>
+                  <label for="order-area" class="block text-sm font-medium text-gray-700 mb-1">Area in Lahore *</label>
+                  <input type="text" id="order-area" name="area" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-pink-500 focus:border-pink-500" placeholder="e.g., Bahria Town, DHA" />
+                </div>
+                <div>
+                  <label for="order-datetime" class="block text-sm font-medium text-gray-700 mb-1">Date & Time *</label>
+                  <input type="datetime-local" id="order-datetime" name="date_time" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-pink-500 focus:border-pink-500" />
+                </div>
+                <div>
+                  <label for="order-notes" class="block text-sm font-medium text-gray-700 mb-1">Additional Notes</label>
+                  <textarea id="order-notes" name="notes" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-pink-500 focus:border-pink-500" placeholder="Any special requirements or preferences..."></textarea>
+                </div>
+              </div>
+              
+              <!-- Payment Information -->
+              <div class="mt-6 pt-4 border-t border-gray-200">
+                <p class="text-sm text-gray-600 mb-2">
+                  <strong>Payment:</strong> After decoration is completed at your location.
+                </p>
+                <p class="text-sm text-gray-600">
+                  If you have any questions, please <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="text-pink-600 hover:text-pink-700 font-semibold underline">contact us on WhatsApp</a>.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="mt-5 sm:mt-6 sm:flex sm:flex-row-reverse gap-3">
+            <button type="submit" class="w-full sm:w-auto bg-pink-600 hover:bg-pink-700 text-white px-6 py-2.5 rounded-lg font-semibold transition-colors">
+              Submit Order
+            </button>
+            <button type="button" onclick="window.closeOrderModal()" class="mt-3 w-full sm:mt-0 sm:w-auto bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-2.5 rounded-lg font-semibold transition-colors">
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script is:inline>
+    // Make functions globally available
+    window.openOrderModal = function(slug, title, price) {
+      const modal = document.getElementById('order-modal');
+      const designInput = document.getElementById('order-design');
+      const titleElement = document.getElementById('modal-product-title');
+      const priceElement = document.getElementById('modal-product-price');
+      
+      if (modal && designInput && titleElement && priceElement) {
+        designInput.value = slug;
+        titleElement.textContent = title;
+        priceElement.textContent = 'Rs ' + price.toLocaleString();
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      }
+    };
+
+    window.closeOrderModal = function() {
+      const modal = document.getElementById('order-modal');
+      const form = document.getElementById('order-form');
+      
+      if (modal) {
+        modal.classList.add('hidden');
+        document.body.style.overflow = 'auto';
+        if (form) {
+          form.reset();
+        }
+      }
+    };
+
+    window.submitOrder = function(event) {
+      event.preventDefault();
+      const form = event.target;
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData.entries());
+      
+      const whatsappNumber = '923227555459';
+      const message = '*Wedding Room Decoration Order*\n\n' +
+        '*Design:* ' + data.design + '\n' +
+        '*Name:* ' + data.name + '\n' +
+        '*Phone:* ' + data.phone + '\n' +
+        '*Area:* ' + data.area + '\n' +
+        '*Date & Time:* ' + data.date_time + '\n' +
+        '*Notes:* ' + (data.notes || 'None') + '\n\n' +
+        'Please confirm this order.';
+
+      const whatsappUrl = 'https://wa.me/' + whatsappNumber + '?text=' + encodeURIComponent(message);
+      window.open(whatsappUrl, '_blank');
+      window.closeOrderModal();
+    };
+
+    // Event delegation for Order Now buttons
+    document.addEventListener('DOMContentLoaded', function() {
+      document.addEventListener('click', function(e) {
+        if (e.target && e.target.classList.contains('order-now-btn')) {
+          const btn = e.target;
+          const slug = btn.getAttribute('data-product-slug');
+          const title = btn.getAttribute('data-product-title');
+          const price = parseInt(btn.getAttribute('data-product-price'));
+          
+          if (slug && title && price) {
+            window.openOrderModal(slug, title, price);
+          }
+        }
+      });
+    });
+  </script>
+
+  <!-- Bottom padding for mobile sticky bar -->
+  <div class="md:hidden h-20"></div>
+
+</body>
+</html>
+

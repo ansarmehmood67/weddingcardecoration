@@ -1,0 +1,1896 @@
+---
+import { products } from '../data/products';
+
+// SEO and metadata
+const siteUrl = 'https://weddingroomdecoration.com';
+const phoneNumber = '+923227555459';
+const whatsappNumber = '923227555459';
+const whatsappMessage = encodeURIComponent('Hi! I\'m interested in wedding room decoration in Lahore. Can you help me?');
+const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+
+// Products display settings
+const initialProductsToShow = 12; // 3 rows × 4 columns
+const productsPerLoad = 12; // Load 12 more products each time
+
+// FAQ data for JSON-LD
+const faqs = [
+  {
+    question: "What is the price of wedding room decoration in Lahore?",
+    answer: "Our simple wedding room decoration at home starts from Rs 6,000 and romantic first-night or luxury honeymoon decoration can go from Rs 9,500+. Final price depends on area in Lahore, timing, flowers, lights and design. Share your location and a photo or reference and we'll send exact options on WhatsApp."
+  },
+  {
+    question: "Which areas of Lahore do you cover for wedding room decoration?",
+    answer: "We decorate wedding rooms in Lahore across DHA, Cantt, Bahria Town, NFC, Model Town, Faisal Town, Township, Johar Town, Wapda Town, Garden Town, Gulberg and nearby areas. If you're slightly outside these zones, message us on WhatsApp and we'll confirm."
+  },
+  {
+    question: "Do you decorate rooms at home, hotels or guest houses?",
+    answer: "Yes. We provide wedding room decoration at home in Lahore, hotel rooms and guest houses, as long as the location allows outside decorators to enter at your booked time."
+  },
+  {
+    question: "Do you offer low-budget wedding room decoration packages?",
+    answer: "Yes. We have low-budget wedding room decoration options with rose petals, simple flower work and fairy lights so you still get a special first-night setup without spending too much. Tell us your budget and we'll suggest designs accordingly."
+  },
+  {
+    question: "Do you use fresh flowers or artificial flowers?",
+    answer: "Our main designs use fresh flowers for the bed, petals and vases. We can also mix some artificial flower decoration for backdrops or masehri if you want to reduce cost or need the décor to stay fresh for many hours."
+  },
+  {
+    question: "Can I customize the colours, flowers and theme?",
+    answer: "Yes. You can send us wedding room decoration ideas, Pinterest screenshots, AI images or examples from Instagram, and we'll match or adapt the design based on your budget and flower availability in Lahore."
+  },
+  {
+    question: "How early should I book my wedding room decoration?",
+    answer: "If your date is fixed, it's best to book 3–7 days before the event. For very busy seasons (Shaadi / Baraat peak days), even earlier is better. For same-day wedding room decoration in Lahore, message us on WhatsApp and we'll confirm only if a team is free."
+  },
+  {
+    question: "How long does it take to decorate the room?",
+    answer: "Most wedding night room decoration setups take around 1–2 hours, depending on design and size of the room. We coordinate time with your family to make sure the couple doesn't see the room before it's ready."
+  },
+  {
+    question: "How do I book and pay?",
+    answer: "You can book through WhatsApp or the Order Now form. Usually we take a small advance (JazzCash/Bank Transfer) to confirm your slot and the remaining amount in cash or transfer after the decoration is completed."
+  },
+  {
+    question: "Do you also decorate for anniversary and honeymoon stays?",
+    answer: "Yes. Our anniversary room decoration and honeymoon bedroom decoration options are very popular for surprise celebrations in Lahore. Just mention if it's an anniversary, welcome-back, honeymoon or first-night, and we'll style the message and décor accordingly."
+  },
+  {
+    question: "How do I decorate a wedding room at home on a low budget?",
+    answer: "Focus on three elements: Bed decoration with petals (heart shape, border or simple scatter), One wall or headboard with fairy lights, A few flower points (side tables, dressing or entrance). Even with limited budget, this gives a clean, romantic simple wedding room decoration at home."
+  },
+  {
+    question: "What is the best colour theme for wedding room decoration?",
+    answer: "The most requested themes in Lahore are: Red & gold – classic romantic first-night look, White & pastel pink/peach – soft, elegant bridal vibe, All-red roses – strong, dramatic wedding night room. The best theme depends on the bedsheet colour, wall colour and the couple's taste."
+  },
+  {
+    question: "How can I make wedding room decoration look romantic but not overdone?",
+    answer: "Use flowers + lights + 1 focal point instead of filling every corner. A beautiful bed design with petals, a clean fairy light wall and a few candles or lamps give a romantic look without feeling crowded or cheap."
+  },
+  {
+    question: "What is the difference between bridal room decoration and wedding night decoration?",
+    answer: "Bridal room decoration usually focuses on masehri / saij design, backdrop, cushions and the whole room for daytime photos. Wedding night / first-night decoration focuses more on the bed, lights and mood when the couple arrives at night. Most families in Lahore now choose both: daytime bridal room + night-time romantic setup."
+  },
+  {
+    question: "How do I decorate a small bedroom for the wedding night?",
+    answer: "For small rooms, avoid heavy structures. Instead: Use wall fairy lights behind the bed, Create a petal path from the door to the bed, Add small flower vases or jars instead of big stands. Small spaces look very good in photos if the bed and wall behind it are decorated nicely."
+  },
+  {
+    question: "What items are needed for wedding room decoration?",
+    answer: "Basic wedding room decoration items include: Fresh flowers (roses, baby's breath, gypso, etc.), Petals for bed and floor, Fairy lights and/or lamps, Candles or LED candles, Ribbons, fabric, tape, pins (for masehri / backdrop), Optional: balloons, banners, initials or name lights. When you book with Lahore Blooms, we bring all the required items for the chosen design."
+  },
+  {
+    question: "Which is better: fresh flower or artificial flower room decoration?",
+    answer: "Fresh flowers look and smell better in real life and photos, but last fewer hours. Artificial flowers work well for backdrops or when the setup must stay for a long time or in very hot rooms. Most couples choose a mix: fresh flowers for bed and close shots, artificial for some background elements."
+  },
+  {
+    question: "Can I reuse some of the wedding room decoration for the next morning or photos?",
+    answer: "Yes. Many couples keep part of the flower room decoration (vases, some petals and the backdrop) for next-morning photos. Just remove petals from the bed when you want to sleep comfortably, and keep the rest for morning pictures."
+  },
+  {
+    question: "What is included in your bridal / wedding room decoration packages in Lahore?",
+    answer: "Our packages include complete room styling: backdrop, flowers, balloons (if selected), LED fairy lights, candles or lamps, bed styling, side tables, and entrance décor. You choose the design from our catalog, and we handle everything from setup to clean finish, so the room is ready when the bride arrives."
+  },
+  {
+    question: "Do you offer emergency or last-minute bridal room decoration services in Lahore?",
+    answer: "Yes, we try our best to help with emergency bridal room decoration. If your decorator cancelled or you decided late, contact us with your location and room photos. If our team is free, we can arrange a fast setup with limited but beautiful options."
+  },
+  {
+    question: "Can I get custom themes like royal, modern, or traditional Pakistani bridal room décor?",
+    answer: "Yes. We create royal, modern minimal, romantic, and traditional Pakistani bridal room themes with colors like red, maroon, gold, blush pink, white, and more. You can also share your own reference pictures—we'll adapt the theme to your room size and budget."
+  },
+  {
+    question: "Do you provide lights, candles, and LED options for bridal room decoration in Lahore?",
+    answer: "Yes, lighting is a big part of our designs. We use warm LED fairy lights, lamps, candles (real or LED), and sometimes neon text signs depending on the package. If you want a soft, romantic lighting look or a bright, Instagram-style setup, we can design it accordingly."
+  },
+  {
+    question: "Is setup and removal included in the bridal room decoration price?",
+    answer: "Yes. Our team comes, sets up the full decoration, and explains which items are returnable (like stands, frames, some props). After the event—either the same night or next day as agreed—we collect the rental items. This service is included in the package price unless otherwise mentioned."
+  },
+  {
+    question: "Can I see your previous bridal room decoration work before booking?",
+    answer: "Of course. We have a portfolio of real bridal room decorations in Lahore with before/after pictures. You can view them on our website gallery and we can also send recent work samples directly on WhatsApp so you feel confident about the result."
+  },
+  {
+    question: "Do you offer discounts or special offers on bridal room decoration in Lahore?",
+    answer: "Sometimes we run seasonal or combo offers, especially if you book bridal room + car decoration + bouquet together. For the latest discounts or packages, just send us a message on WhatsApp and we'll share any active deals."
+  },
+  {
+    question: "How do I contact you for bridal room decoration in Lahore?",
+    answer: "You can send us a WhatsApp message (preferred) or fill the short \"Order Now\" form on this page with your name, event date, location, and room photos. We'll reply with ideas, price, and available slots. If you have any questions, just ask—we're happy to guide you."
+  }
+];
+
+// LocalBusiness JSON-LD
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Lahore Blooms – Wedding Room Decoration Lahore",
+  "description": "Professional wedding room decoration service in Lahore. Fresh flowers, bridal room décor, first-night setups, masehri design, and honeymoon bedroom decoration. Serving College Road, Township, Green Town, Bahria Town, Valencia Town, Wapda Town, Johar Town, DHA, Model Town, Gulberg, Faisal Town, Iqbal Town, Shadman, Cantt, Garden Town, Allama Iqbal Town and all areas of Lahore.",
+  "url": siteUrl,
+  "telephone": phoneNumber,
+  "priceRange": "Rs 6,000+",
+  "image": `${siteUrl}/images/hero-wedding-room .png`,
+  "logo": `${siteUrl}/images/hero-wedding-room .png`,
+  "areaServed": [
+    {
+      "@type": "City",
+      "name": "Lahore"
+    },
+    {
+      "@type": "City",
+      "name": "College Road, Lahore"
+    },
+    {
+      "@type": "City",
+      "name": "Township, Lahore"
+    },
+    {
+      "@type": "City",
+      "name": "Green Town, Lahore"
+    },
+    {
+      "@type": "City",
+      "name": "Bahria Town, Lahore"
+    },
+    {
+      "@type": "City",
+      "name": "Valencia Town, Lahore"
+    },
+    {
+      "@type": "City",
+      "name": "Wapda Town, Lahore"
+    },
+    {
+      "@type": "City",
+      "name": "Johar Town, Lahore"
+    },
+    {
+      "@type": "City",
+      "name": "DHA, Lahore"
+    },
+    {
+      "@type": "City",
+      "name": "Model Town, Lahore"
+    },
+    {
+      "@type": "City",
+      "name": "Gulberg, Lahore"
+    },
+    {
+      "@type": "City",
+      "name": "Faisal Town, Lahore"
+    },
+    {
+      "@type": "City",
+      "name": "Iqbal Town, Lahore"
+    },
+    {
+      "@type": "City",
+      "name": "Shadman, Lahore"
+    },
+    {
+      "@type": "City",
+      "name": "Cantt, Lahore"
+    },
+    {
+      "@type": "City",
+      "name": "Garden Town, Lahore"
+    },
+    {
+      "@type": "City",
+      "name": "Allama Iqbal Town, Lahore"
+    }
+  ],
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "31.5204",
+    "longitude": "74.3587"
+  },
+  "address": [
+    {
+      "@type": "PostalAddress",
+      "addressLocality": "Lahore",
+      "addressRegion": "Punjab",
+      "addressCountry": "PK",
+      "streetAddress": "College Road"
+    },
+    {
+      "@type": "PostalAddress",
+      "addressLocality": "Lahore",
+      "addressRegion": "Punjab",
+      "addressCountry": "PK",
+      "streetAddress": "Township"
+    },
+    {
+      "@type": "PostalAddress",
+      "addressLocality": "Lahore",
+      "addressRegion": "Punjab",
+      "addressCountry": "PK",
+      "streetAddress": "Green Town"
+    },
+    {
+      "@type": "PostalAddress",
+      "addressLocality": "Lahore",
+      "addressRegion": "Punjab",
+      "addressCountry": "PK",
+      "streetAddress": "Bahria Town"
+    },
+    {
+      "@type": "PostalAddress",
+      "addressLocality": "Lahore",
+      "addressRegion": "Punjab",
+      "addressCountry": "PK",
+      "streetAddress": "Valencia Town"
+    },
+    {
+      "@type": "PostalAddress",
+      "addressLocality": "Lahore",
+      "addressRegion": "Punjab",
+      "addressCountry": "PK",
+      "streetAddress": "Wapda Town"
+    },
+    {
+      "@type": "PostalAddress",
+      "addressLocality": "Lahore",
+      "addressRegion": "Punjab",
+      "addressCountry": "PK",
+      "streetAddress": "Johar Town"
+    },
+    {
+      "@type": "PostalAddress",
+      "addressLocality": "Lahore",
+      "addressRegion": "Punjab",
+      "addressCountry": "PK",
+      "streetAddress": "DHA"
+    },
+    {
+      "@type": "PostalAddress",
+      "addressLocality": "Lahore",
+      "addressRegion": "Punjab",
+      "addressCountry": "PK",
+      "streetAddress": "Model Town"
+    },
+    {
+      "@type": "PostalAddress",
+      "addressLocality": "Lahore",
+      "addressRegion": "Punjab",
+      "addressCountry": "PK",
+      "streetAddress": "Gulberg"
+    },
+    {
+      "@type": "PostalAddress",
+      "addressLocality": "Lahore",
+      "addressRegion": "Punjab",
+      "addressCountry": "PK",
+      "streetAddress": "Faisal Town"
+    },
+    {
+      "@type": "PostalAddress",
+      "addressLocality": "Lahore",
+      "addressRegion": "Punjab",
+      "addressCountry": "PK",
+      "streetAddress": "Iqbal Town"
+    },
+    {
+      "@type": "PostalAddress",
+      "addressLocality": "Lahore",
+      "addressRegion": "Punjab",
+      "addressCountry": "PK",
+      "streetAddress": "Shadman"
+    },
+    {
+      "@type": "PostalAddress",
+      "addressLocality": "Lahore",
+      "addressRegion": "Punjab",
+      "addressCountry": "PK",
+      "streetAddress": "Cantt"
+    },
+    {
+      "@type": "PostalAddress",
+      "addressLocality": "Lahore",
+      "addressRegion": "Punjab",
+      "addressCountry": "PK",
+      "streetAddress": "Garden Town"
+    },
+    {
+      "@type": "PostalAddress",
+      "addressLocality": "Lahore",
+      "addressRegion": "Punjab",
+      "addressCountry": "PK",
+      "streetAddress": "Allama Iqbal Town"
+    }
+  ],
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+      "opens": "00:00",
+      "closes": "23:59"
+    }
+  ],
+  "openingHours": "Mo-Su 00:00-23:59",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "reviewCount": "127"
+  },
+  "sameAs": [
+    "https://share.google/6PWLf5zS697dVCQaE"
+  ]
+};
+
+// FAQPage JSON-LD
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map(faq => ({
+    "@type": "Question",
+    "name": faq.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.answer
+    }
+  }))
+};
+
+// Organization JSON-LD
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Lahore Blooms",
+  "url": siteUrl,
+  "logo": `${siteUrl}/images/hero-wedding-room .png`,
+  "description": "Professional wedding room decoration service in Lahore. Fresh flowers, bridal room décor, first-night setups, masehri design, and honeymoon bedroom decoration.",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": phoneNumber,
+    "contactType": "Customer Service",
+    "areaServed": "PK",
+    "availableLanguage": ["en", "ur"]
+  },
+  "sameAs": [
+    "https://share.google/6PWLf5zS697dVCQaE"
+  ]
+};
+
+// WebSite JSON-LD with SearchAction
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Lahore Blooms - Wedding Room Decoration Lahore",
+  "url": siteUrl,
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": `${siteUrl}/?q={search_term_string}`
+    },
+    "query-input": "required name=search_term_string"
+  }
+};
+
+// Service JSON-LD (3 services)
+const serviceSchemas = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Bridal, Wedding Night & Masehri Room Decoration",
+    "description": "Complete wedding room decoration in Lahore for the bride and groom – one service that covers bridal room décor, wedding night / suhagrat setup and traditional masehri / saij design. Fresh flowers, petals, fairy lights and fabric styling.",
+    "provider": {
+      "@type": "LocalBusiness",
+      "name": "Lahore Blooms"
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "Lahore"
+    },
+    "offers": {
+      "@type": "Offer",
+      "priceCurrency": "PKR",
+      "priceRange": "Rs 6,000+"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Anniversary Room Decoration",
+    "description": "Special anniversary room decoration with numbers, message banner and fresh flowers. Perfect for couples celebrating 1st, 5th, 10th or any year – at home or hotel in Lahore – with a romantic yet comfortable bedroom setup.",
+    "provider": {
+      "@type": "LocalBusiness",
+      "name": "Lahore Blooms"
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "Lahore"
+    },
+    "offers": {
+      "@type": "Offer",
+      "priceCurrency": "PKR",
+      "priceRange": "Rs 6,000+"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Honeymoon Bedroom Decoration",
+    "description": "Premium honeymoon bedroom decoration for newly-weds and couples visiting Lahore. Includes romantic honeymoon bed design with roses, petals and soft lighting so your stay starts with a beautiful surprise.",
+    "provider": {
+      "@type": "LocalBusiness",
+      "name": "Lahore Blooms"
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "Lahore"
+    },
+    "offers": {
+      "@type": "Offer",
+      "priceCurrency": "PKR",
+      "priceRange": "Rs 6,000+"
+    }
+  }
+];
+
+// HowTo JSON-LD (4-step process)
+const howToSchema = {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How Our Wedding Room Decoration Service in Lahore Works",
+  "description": "Simple, professional process from booking to your perfect wedding night room",
+  "step": [
+    {
+      "@type": "HowToStep",
+      "position": 1,
+      "name": "Share your date & location",
+      "text": "Tell us your area in Lahore (DHA, Bahria Town, Model Town, Johar Town, Faisal Town, Wapda Town, Gulberg, Cantt, etc.) and choose a package."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 2,
+      "name": "Pick theme & colours",
+      "text": "Red & gold, pastel, romantic first-night, simple Pakistani wedding room decoration, or custom."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 3,
+      "name": "We decorate your room",
+      "text": "Our team arrives on time, completes full room décor for wedding night in 1–2 hours, and leaves before the couple arrives."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 4,
+      "name": "Enjoy & share photos",
+      "text": "You get a photo-ready wedding night room. We can also keep petals and candles easy to remove for comfort."
+    }
+  ]
+};
+
+// ItemList JSON-LD (Product Catalog)
+const itemListSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Wedding Room Decoration Designs – Choose Your Setup",
+  "description": "Every design below is a ready-to-book wedding room decoration product. Click View Details to see more photos and full description, or hit Order Now to book the same look for your date in Lahore.",
+  "numberOfItems": products.length,
+  "itemListElement": products.map((product, index) => ({
+    "@type": "ListItem",
+    "position": index + 1,
+    "item": {
+      "@type": "Product",
+      "name": product.title,
+      "description": product.shortDescription,
+      "image": `${siteUrl}${product.image}`,
+      "url": `${siteUrl}/design/${product.slug}`,
+      "offers": {
+        "@type": "Offer",
+        "price": product.price.toString(),
+        "priceCurrency": "PKR",
+        "availability": "https://schema.org/InStock"
+      }
+    }
+  }))
+};
+
+// Review JSON-LD (3 testimonials)
+const reviewSchemas = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Review",
+    "itemReviewed": {
+      "@type": "LocalBusiness",
+      "name": "Lahore Blooms"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "Ayesha"
+    },
+    "reviewRating": {
+      "@type": "Rating",
+      "ratingValue": "5",
+      "bestRating": "5"
+    },
+    "reviewBody": "I booked from Dubai for my sister's bridal room decoration in Lahore. Everything was exactly like the pictures and on time.",
+    "datePublished": "2024-01-15"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Review",
+    "itemReviewed": {
+      "@type": "LocalBusiness",
+      "name": "Lahore Blooms"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "Hamza & Maryam"
+    },
+    "reviewRating": {
+      "@type": "Rating",
+      "ratingValue": "5",
+      "bestRating": "5"
+    },
+    "reviewBody": "We chose the romantic first night room decoration package. The bed, lights and petals were perfect. Highly recommended.",
+    "datePublished": "2024-02-20"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Review",
+    "itemReviewed": {
+      "@type": "LocalBusiness",
+      "name": "Lahore Blooms"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "Sana"
+    },
+    "reviewRating": {
+      "@type": "Rating",
+      "ratingValue": "5",
+      "bestRating": "5"
+    },
+    "reviewBody": "Booked simple wedding room decoration at home as we were on a budget. Still looked premium and fresh.",
+    "datePublished": "2024-03-10"
+  }
+];
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Wedding room decoration in Lahore with fresh flowers, romantic first night setups and bridal room décor at home. Low-budget and luxury packages, same-day service. Book on WhatsApp.">
+  <link rel="canonical" href={siteUrl}>
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content={siteUrl}>
+  <meta property="og:title" content="Wedding Room Decoration in Lahore | Bridal & First Night Décor">
+  <meta property="og:description" content="Wedding room decoration in Lahore with fresh flowers, romantic first night setups and bridal room décor at home. Low-budget and luxury packages, same-day service. Book on WhatsApp.">
+  <meta property="og:image" content={`${siteUrl}/images/hero-wedding-room .png`}>
+  
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content={siteUrl}>
+  <meta property="twitter:title" content="Wedding Room Decoration in Lahore | Bridal & First Night Décor">
+  <meta property="twitter:description" content="Wedding room decoration in Lahore with fresh flowers, romantic first night setups and bridal room décor at home. Low-budget and luxury packages, same-day service. Book on WhatsApp.">
+  <meta property="twitter:image" content={`${siteUrl}/images/hero-wedding-room .png`}>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+  <link rel="manifest" href="/site.webmanifest">
+  
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- DNS Prefetch for external domains -->
+  <link rel="dns-prefetch" href="https://wa.me">
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+  
+  <!-- Preload critical hero image -->
+  <link rel="preload" as="image" href="/images/hero-wedding-room .png" fetchpriority="high">
+  
+  <title>Wedding Room Decoration in Lahore | Bridal & First Night Décor</title>
+  
+  <!-- JSON-LD Schemas -->
+  <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(howToSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(itemListSchema)} />
+  {serviceSchemas.map(service => (
+    <script type="application/ld+json" set:html={JSON.stringify(service)} />
+  ))}
+  {reviewSchemas.map(review => (
+    <script type="application/ld+json" set:html={JSON.stringify(review)} />
+  ))}
+  
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+    }
+    /* Skip to content link */
+    .skip-to-content {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #ec4899;
+      color: white;
+      padding: 8px 16px;
+      text-decoration: none;
+      z-index: 100;
+      border-radius: 0 0 4px 0;
+    }
+    .skip-to-content:focus {
+      top: 0;
+    }
+  </style>
+</head>
+<body class="bg-white text-gray-900 antialiased">
+  <!-- Skip to content link for accessibility -->
+  <a href="#main-content" class="skip-to-content">Skip to main content</a>
+  
+  <!-- Header - Desktop -->
+  <header class="hidden md:flex sticky top-0 z-50 bg-white/95 backdrop-blur-sm shadow-sm border-b border-gray-100">
+    <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <h1 class="text-2xl font-bold bg-gradient-to-r from-pink-600 to-rose-600 bg-clip-text text-transparent">
+          Lahore Blooms
+        </h1>
+        <span class="text-xs text-gray-500 font-medium">Wedding Room Decoration in Lahore</span>
+      </div>
+      <nav class="hidden lg:flex items-center gap-6">
+        <a href="#packages" class="text-gray-700 hover:text-pink-600 transition-colors font-medium text-sm">Designs</a>
+        <a href="#services" class="text-gray-700 hover:text-pink-600 transition-colors font-medium text-sm">Services</a>
+        <a href="#ideas" class="text-gray-700 hover:text-pink-600 transition-colors font-medium text-sm">Ideas</a>
+        <a href="#how-it-works" class="text-gray-700 hover:text-pink-600 transition-colors font-medium text-sm">How It Works</a>
+        <a href="#reviews" class="text-gray-700 hover:text-pink-600 transition-colors font-medium text-sm">Reviews</a>
+        <a href="#faq" class="text-gray-700 hover:text-pink-600 transition-colors font-medium text-sm">FAQ</a>
+        <a href={`tel:${phoneNumber}`} class="text-gray-700 hover:text-pink-600 transition-colors font-medium text-sm">{phoneNumber}</a>
+        <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full font-semibold text-sm transition-colors flex items-center gap-2">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          WhatsApp
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Header - Mobile -->
+  <header class="md:hidden sticky top-0 z-50 bg-white shadow-sm border-b border-gray-100">
+    <div class="px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <h1 class="text-xl font-bold bg-gradient-to-r from-pink-600 to-rose-600 bg-clip-text text-transparent">
+          Lahore Blooms
+        </h1>
+      </div>
+      <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="bg-green-500 hover:bg-green-600 text-white p-2 rounded-full transition-colors">
+        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+      </a>
+    </div>
+  </header>
+
+  <!-- Mobile Sticky Bottom Bar -->
+  <div class="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-gray-200 shadow-lg">
+    <div class="flex">
+      <a href={`tel:${phoneNumber}`} class="flex-1 py-4 px-4 text-center font-semibold text-gray-700 hover:bg-gray-50 transition-colors flex items-center justify-center gap-2">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+        Call
+      </a>
+      <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="flex-1 py-4 px-4 text-center font-semibold bg-green-500 text-white hover:bg-green-600 transition-colors flex items-center justify-center gap-2">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        WhatsApp
+      </a>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="relative pt-16 md:pt-24 pb-20 md:pb-32 px-4 md:px-8 lg:px-12 bg-cover bg-center bg-no-repeat" style="background-image: url('/images/hero-wedding-room .png');">
+    <!-- Overlay - Left half only, fading to center -->
+    <div class="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-transparent pointer-events-none"></div>
+    
+    <div class="relative z-10 max-w-4xl">
+      <div class="text-left max-w-2xl">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight">
+          Wedding Room Decoration in Lahore
+        </h1>
+        <p class="text-lg md:text-xl text-white/90 mb-6 leading-relaxed">
+          Romantic wedding room decoration at home in Lahore with fresh flowers, fairy lights and full bridal bedroom décor. Choose from simple, low-budget or luxury wedding night room packages.
+        </p>
+        
+        <!-- Bullet Strip -->
+        <div class="grid sm:grid-cols-2 gap-3 mb-8">
+          <div class="flex items-center gap-2 text-white">
+            <span class="text-green-400 text-lg">✅</span>
+            <span class="text-sm md:text-base">At home in Lahore – DHA, Bahria Town & more</span>
+          </div>
+          <div class="flex items-center gap-2 text-white">
+            <span class="text-pink-300 text-lg">🌹</span>
+            <span class="text-sm md:text-base">Fresh flower decoration</span>
+          </div>
+          <div class="flex items-center gap-2 text-white">
+            <span class="text-green-400 text-lg">💸</span>
+            <span class="text-sm md:text-base">Low-budget & premium packages</span>
+          </div>
+          <div class="flex items-center gap-2 text-white">
+            <span class="text-blue-300 text-lg">⏱️</span>
+            <span class="text-sm md:text-base">Same-day booking available</span>
+          </div>
+        </div>
+
+        <!-- CTAs -->
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="#packages" class="bg-pink-600 hover:bg-pink-700 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all flex items-center justify-center gap-2 shadow-xl hover:shadow-2xl transform hover:-translate-y-0.5">
+            See Packages & Prices
+          </a>
+          <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="bg-white/90 hover:bg-white text-gray-900 px-8 py-4 rounded-full font-semibold text-lg transition-all flex items-center justify-center gap-2 shadow-xl hover:shadow-2xl">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            WhatsApp Us for Today's Booking
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- At a Glance Info Box -->
+  <section class="py-8 px-4 bg-white">
+    <div class="container mx-auto max-w-6xl">
+      <div class="bg-gradient-to-br from-pink-50 via-rose-50 to-purple-50 rounded-2xl p-6 md:p-8 shadow-lg border border-pink-200">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Service -->
+          <div class="flex items-start gap-3">
+            <div class="flex-shrink-0 w-10 h-10 bg-pink-600 rounded-lg flex items-center justify-center">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-gray-900 mb-1">Service</h3>
+              <p class="text-sm text-gray-700">Wedding room decoration, bridal room decoration, masehri & honeymoon bed design in Lahore</p>
+            </div>
+          </div>
+
+          <!-- Where -->
+          <div class="flex items-start gap-3">
+            <div class="flex-shrink-0 w-10 h-10 bg-rose-600 rounded-lg flex items-center justify-center">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-gray-900 mb-1">Where</h3>
+              <p class="text-sm text-gray-700">At home, hotel rooms, guest houses across Lahore</p>
+            </div>
+          </div>
+
+          <!-- Includes -->
+          <div class="flex items-start gap-3">
+            <div class="flex-shrink-0 w-10 h-10 bg-purple-600 rounded-lg flex items-center justify-center">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-gray-900 mb-1">Includes</h3>
+              <p class="text-sm text-gray-700">Bed & room flower decoration, petals, fairy lights, candles (on request), entrance & door décor</p>
+            </div>
+          </div>
+
+          <!-- Starting From -->
+          <div class="flex items-start gap-3">
+            <div class="flex-shrink-0 w-10 h-10 bg-green-600 rounded-lg flex items-center justify-center">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-gray-900 mb-1">Starting From</h3>
+              <p class="text-sm text-gray-700"><span class="font-bold text-pink-600">Rs 6,000</span> for simple wedding room decoration</p>
+            </div>
+          </div>
+
+          <!-- Best For -->
+          <div class="flex items-start gap-3">
+            <div class="flex-shrink-0 w-10 h-10 bg-pink-500 rounded-lg flex items-center justify-center">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-gray-900 mb-1">Best For</h3>
+              <p class="text-sm text-gray-700">First night (suhagrat), bridal room, anniversary & honeymoon room decoration</p>
+            </div>
+          </div>
+
+          <!-- Booking -->
+          <div class="flex items-start gap-3">
+            <div class="flex-shrink-0 w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-gray-900 mb-1">Booking</h3>
+              <p class="text-sm text-gray-700">WhatsApp, call or quick order form pop-up</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products Catalog Section -->
+  <main id="main-content">
+  <section id="packages" class="py-16 md:py-24 px-4 bg-gray-50">
+    <div class="container mx-auto max-w-6xl">
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 text-gray-900">
+        Wedding Room Decoration Designs – Choose Your Setup
+      </h2>
+      <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
+        Every design below is a ready-to-book wedding room decoration product. Click View Details to see more photos and full description, or hit Order Now to book the same look for your date in Lahore.
+      </p>
+      <div id="products-grid" class="grid md:grid-cols-3 lg:grid-cols-4 gap-6 mb-8">
+        {products.slice(0, initialProductsToShow).map((product) => (
+          <div class="product-card group bg-white rounded-lg overflow-hidden shadow-sm border border-gray-200 hover:shadow-lg transition-all duration-300">
+            <div class="relative aspect-square overflow-hidden bg-gray-100">
+              <img 
+                src={product.image} 
+                alt={product.title}
+                class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                loading="lazy"
+                width="400"
+                height="400"
+              />
+              <div class="absolute top-3 left-3">
+                <span class="bg-pink-600 text-white text-xs font-bold px-2.5 py-1 rounded-full">New</span>
+              </div>
+            </div>
+            <div class="p-4">
+              <div class="mb-2">
+                <span class="text-xs text-gray-500 uppercase tracking-wide">{product.category}</span>
+              </div>
+              <h3 class="text-base font-semibold text-gray-900 mb-3 line-clamp-2 min-h-[2.5rem] group-hover:text-pink-600 transition-colors">
+                {product.title}
+              </h3>
+              <div class="flex items-baseline gap-2 mb-4">
+                <span class="text-xl font-bold text-gray-900">Rs {product.price.toLocaleString()}</span>
+              </div>
+              <div class="flex gap-2">
+                <button 
+                  type="button"
+                  data-product-slug={product.slug}
+                  data-product-title={product.title}
+                  data-product-price={product.price}
+                  class="order-now-btn flex-1 bg-pink-600 hover:bg-pink-700 text-white text-center py-2.5 rounded-md text-sm font-medium transition-colors"
+                >
+                  Order Now
+                </button>
+                <a 
+                  href={`/design/${product.slug}`}
+                  class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 text-center py-2.5 rounded-md text-sm font-medium transition-colors"
+                >
+                  View Details
+                </a>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div id="hidden-products" class="hidden grid md:grid-cols-3 lg:grid-cols-4 gap-6 mb-8">
+        {products.slice(initialProductsToShow).map((product) => (
+          <div class="product-card group bg-white rounded-lg overflow-hidden shadow-sm border border-gray-200 hover:shadow-lg transition-all duration-300">
+            <div class="relative aspect-square overflow-hidden bg-gray-100">
+              <img 
+                src={product.image} 
+                alt={product.title}
+                class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                loading="lazy"
+                width="400"
+                height="400"
+              />
+              <div class="absolute top-3 left-3">
+                <span class="bg-pink-600 text-white text-xs font-bold px-2.5 py-1 rounded-full">New</span>
+              </div>
+            </div>
+            <div class="p-4">
+              <div class="mb-2">
+                <span class="text-xs text-gray-500 uppercase tracking-wide">{product.category}</span>
+              </div>
+              <h3 class="text-base font-semibold text-gray-900 mb-3 line-clamp-2 min-h-[2.5rem] group-hover:text-pink-600 transition-colors">
+                {product.title}
+              </h3>
+              <div class="flex items-baseline gap-2 mb-4">
+                <span class="text-xl font-bold text-gray-900">Rs {product.price.toLocaleString()}</span>
+              </div>
+              <div class="flex gap-2">
+                <button 
+                  type="button"
+                  data-product-slug={product.slug}
+                  data-product-title={product.title}
+                  data-product-price={product.price}
+                  class="order-now-btn flex-1 bg-pink-600 hover:bg-pink-700 text-white text-center py-2.5 rounded-md text-sm font-medium transition-colors"
+                >
+                  Order Now
+                </button>
+                <a 
+                  href={`/design/${product.slug}`}
+                  class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 text-center py-2.5 rounded-md text-sm font-medium transition-colors"
+                >
+                  View Details
+                </a>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      {products.length > initialProductsToShow && (
+        <div class="text-center mb-8">
+          <button 
+            id="view-more-btn"
+            type="button"
+            onclick="window.loadMoreProducts()"
+            class="bg-gradient-to-r from-pink-600 via-rose-600 to-purple-600 hover:from-pink-700 hover:via-rose-700 hover:to-purple-700 text-white px-8 py-3 rounded-full font-semibold transition-all shadow-xl hover:shadow-2xl transform hover:-translate-y-0.5"
+          >
+            Load More
+          </button>
+        </div>
+      )}
+
+      <!-- WhatsApp CTA -->
+      <div class="text-center mt-12 pt-8 border-t border-gray-200">
+        <p class="text-gray-700 mb-4 text-lg">
+          Looking for something else?
+        </p>
+        <a 
+          href={whatsappUrl} 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-full font-semibold transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+        >
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          WhatsApp Now
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Overview Section -->
+  <section id="services" class="py-16 md:py-24 px-4 bg-white">
+    <div class="container mx-auto max-w-6xl">
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-6 text-gray-900">
+        Wedding Room Decoration Services in Lahore
+      </h2>
+      <p class="text-center text-gray-600 mb-12 max-w-3xl mx-auto text-lg leading-relaxed">
+        We don't just sell flowers – we provide a full wedding room decoration service in Lahore.
+      </p>
+      <p class="text-center text-gray-600 mb-12 max-w-3xl mx-auto text-lg leading-relaxed">
+        From bridal & first-night bedroom décor to anniversary surprises and honeymoon stays, our team designs and installs everything for you at home or in hotels across Lahore.
+      </p>
+
+      <!-- Row 1: Bridal + Wedding Night + Masehri - Image Left, Content Right -->
+      <div class="mb-12 md:mb-16">
+        <div class="flex flex-col md:flex-row items-center gap-6 md:gap-8">
+          <!-- Image Left -->
+          <div class="w-full md:w-1/2">
+            <img 
+              src="/images/bridal-wedding-night-masehri.webp" 
+              alt="Bridal, Wedding Night & Masehri Room Decoration"
+              class="w-full h-auto rounded-xl shadow-lg object-cover"
+              loading="lazy"
+            />
+          </div>
+          <!-- Content Right -->
+          <div class="w-full md:w-1/2 bg-gradient-to-br from-pink-50 to-rose-50 rounded-xl p-6 md:p-8 border border-pink-200">
+            <div class="w-12 h-12 bg-pink-600 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+            </div>
+            <h3 class="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
+              Bridal, Wedding Night & Masehri Room Decoration
+            </h3>
+            <p class="text-gray-700 mb-4 font-medium">
+              Bridal Room, First-Night & Saij Design
+            </p>
+            <p class="text-gray-600 leading-relaxed mb-3">
+              Complete wedding room decoration in Lahore for the bride and groom – one service that covers bridal room décor, wedding night / suhagrat setup and traditional masehri / saij design.
+            </p>
+            <p class="text-gray-600 leading-relaxed">
+              Fresh flowers, petals, fairy lights and fabric styling for a bedroom that looks beautiful in photos and feels romantic when the couple enters.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 2: Anniversary - Image Right, Content Left -->
+      <div class="mb-12 md:mb-16">
+        <div class="flex flex-col md:flex-row-reverse items-center gap-6 md:gap-8">
+          <!-- Image Right -->
+          <div class="w-full md:w-1/2">
+            <img 
+              src="/images/anniversary-room-decoration.webp" 
+              alt="Anniversary Room Decoration"
+              class="w-full h-auto rounded-xl shadow-lg object-cover"
+              loading="lazy"
+            />
+          </div>
+          <!-- Content Left -->
+          <div class="w-full md:w-1/2 bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-6 md:p-8 border border-purple-200">
+            <div class="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+            </div>
+            <h3 class="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
+              Anniversary Room Decoration
+            </h3>
+            <p class="text-gray-700 mb-4 font-medium">
+              Romantic Anniversary Bedroom Décor
+            </p>
+            <p class="text-gray-600 leading-relaxed mb-3">
+              Special anniversary room decoration with numbers, message banner and fresh flowers.
+            </p>
+            <p class="text-gray-600 leading-relaxed">
+              Perfect for couples celebrating 1st, 5th, 10th or any year – at home or hotel in Lahore – with a romantic yet comfortable bedroom setup.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 3: Honeymoon - Image Left, Content Right -->
+      <div class="mb-8">
+        <div class="flex flex-col md:flex-row items-center gap-6 md:gap-8">
+          <!-- Image Left -->
+          <div class="w-full md:w-1/2">
+            <img 
+              src="/images/honeymoon-bedroom-decoration.webp" 
+              alt="Honeymoon Bedroom Decoration"
+              class="w-full h-auto rounded-xl shadow-lg object-cover"
+              loading="lazy"
+            />
+          </div>
+          <!-- Content Right -->
+          <div class="w-full md:w-1/2 bg-gradient-to-br from-rose-50 to-pink-50 rounded-xl p-6 md:p-8 border border-rose-200">
+            <div class="w-12 h-12 bg-rose-600 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2v13m-2 0H6a2 2 0 01-2-2V9a2 2 0 012-2h4m8 0h4a2 2 0 012 2v10a2 2 0 01-2 2h-4m-8 0V9a2 2 0 012-2h4m0 0V6a2 2 0 112 2v1"/></svg>
+            </div>
+            <h3 class="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
+              Honeymoon Bedroom Decoration
+            </h3>
+            <p class="text-gray-700 mb-4 font-medium">
+              Honeymoon Bed Design for Newly-Weds
+            </p>
+            <p class="text-gray-600 leading-relaxed mb-3">
+              Premium honeymoon bedroom decoration for newly-weds and couples visiting Lahore.
+            </p>
+            <p class="text-gray-600 leading-relaxed">
+              Includes romantic honeymoon bed design with roses, petals and soft lighting so your stay starts with a beautiful surprise.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <p class="text-center text-gray-700 font-medium">
+        Next step: Choose your favourite wedding room decoration design from the products above and book it instantly.
+      </p>
+    </div>
+  </section>
+
+  <!-- Order Modal -->
+  <div id="order-modal" class="hidden fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title" aria-describedby="modal-description" role="dialog" aria-modal="true">
+    <div class="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+      <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" onclick="window.closeOrderModal()" aria-label="Close modal"></div>
+      <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+      <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+        <form id="order-form" onsubmit="window.submitOrder(event)" class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+          <div class="sm:flex sm:items-start">
+            <div class="mt-3 text-center sm:mt-0 sm:text-left w-full">
+              <h3 class="text-2xl font-bold text-gray-900 mb-4" id="modal-title">Order Wedding Room Decoration</h3>
+              <p id="modal-description" class="sr-only">Fill out the form below to order your wedding room decoration. All fields marked with * are required.</p>
+              <div class="mb-4">
+                <p class="text-lg font-semibold text-pink-600" id="modal-product-title"></p>
+                <p class="text-gray-600" id="modal-product-price"></p>
+              </div>
+              <input type="hidden" id="order-design" name="design" />
+              <div class="space-y-4">
+                <div>
+                  <label for="order-name" class="block text-sm font-medium text-gray-700 mb-1">Name *</label>
+                  <input type="text" id="order-name" name="name" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-pink-500 focus:border-pink-500" />
+                </div>
+                <div>
+                  <label for="order-phone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number *</label>
+                  <input type="tel" id="order-phone" name="phone" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-pink-500 focus:border-pink-500" />
+                </div>
+                <div>
+                  <label for="order-area" class="block text-sm font-medium text-gray-700 mb-1">Area in Lahore *</label>
+                  <input type="text" id="order-area" name="area" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-pink-500 focus:border-pink-500" placeholder="e.g., Bahria Town, DHA" />
+                </div>
+                <div>
+                  <label for="order-datetime" class="block text-sm font-medium text-gray-700 mb-1">Date & Time *</label>
+                  <input type="datetime-local" id="order-datetime" name="date_time" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-pink-500 focus:border-pink-500" />
+                </div>
+                <div>
+                  <label for="order-notes" class="block text-sm font-medium text-gray-700 mb-1">Additional Notes</label>
+                  <textarea id="order-notes" name="notes" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-pink-500 focus:border-pink-500" placeholder="Any special requirements or preferences..."></textarea>
+                </div>
+              </div>
+              
+              <!-- Payment Information -->
+              <div class="mt-6 pt-4 border-t border-gray-200">
+                <p class="text-sm text-gray-600 mb-2">
+                  <strong>Payment:</strong> After decoration is completed at your location.
+                </p>
+                <p class="text-sm text-gray-600">
+                  If you have any questions, please <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="text-pink-600 hover:text-pink-700 font-semibold underline">contact us on WhatsApp</a>.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="mt-5 sm:mt-6 sm:flex sm:flex-row-reverse gap-3">
+            <button type="submit" class="w-full sm:w-auto bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-700 hover:to-rose-700 text-white px-6 py-2.5 rounded-lg font-semibold transition-all shadow-lg hover:shadow-xl">
+              Submit Order
+            </button>
+            <button type="button" onclick="window.closeOrderModal()" class="mt-3 w-full sm:mt-0 sm:w-auto bg-gradient-to-r from-gray-200 to-gray-300 hover:from-gray-300 hover:to-gray-400 text-gray-800 px-6 py-2.5 rounded-lg font-semibold transition-all">
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script is:inline>
+    // Make functions globally available
+    window.openOrderModal = function(slug, title, price) {
+      const modal = document.getElementById('order-modal');
+      const designInput = document.getElementById('order-design');
+      const titleElement = document.getElementById('modal-product-title');
+      const priceElement = document.getElementById('modal-product-price');
+      
+      if (modal && designInput && titleElement && priceElement) {
+        designInput.value = slug;
+        titleElement.textContent = title;
+        priceElement.textContent = 'Rs ' + price.toLocaleString();
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      }
+    };
+
+    window.closeOrderModal = function() {
+      const modal = document.getElementById('order-modal');
+      const form = document.getElementById('order-form');
+      
+      if (modal) {
+        modal.classList.add('hidden');
+        document.body.style.overflow = 'auto';
+        if (form) {
+          form.reset();
+        }
+      }
+    };
+
+    window.submitOrder = function(event) {
+      event.preventDefault();
+      const form = event.target;
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData.entries());
+      
+      const whatsappNumber = '923227555459';
+      const message = '*Wedding Room Decoration Order*\n\n' +
+        '*Design:* ' + data.design + '\n' +
+        '*Name:* ' + data.name + '\n' +
+        '*Phone:* ' + data.phone + '\n' +
+        '*Area:* ' + data.area + '\n' +
+        '*Date & Time:* ' + data.date_time + '\n' +
+        '*Notes:* ' + (data.notes || 'None') + '\n\n' +
+        'Please confirm this order.';
+
+      const whatsappUrl = 'https://wa.me/' + whatsappNumber + '?text=' + encodeURIComponent(message);
+      window.open(whatsappUrl, '_blank');
+      window.closeOrderModal();
+    };
+
+    window.loadMoreProducts = function() {
+      const hiddenProducts = document.getElementById('hidden-products');
+      const productsGrid = document.getElementById('products-grid');
+      const viewMoreBtn = document.getElementById('view-more-btn');
+      
+      if (hiddenProducts && hiddenProducts.classList.contains('hidden')) {
+        hiddenProducts.classList.remove('hidden');
+        hiddenProducts.classList.add('grid');
+        const hiddenCards = hiddenProducts.querySelectorAll('.product-card');
+        hiddenCards.forEach(function(card) {
+          productsGrid.appendChild(card);
+        });
+        hiddenProducts.remove();
+        if (viewMoreBtn) {
+          viewMoreBtn.remove();
+        }
+      }
+    };
+
+    // Event delegation for Order Now buttons
+    document.addEventListener('DOMContentLoaded', function() {
+      document.addEventListener('click', function(e) {
+        if (e.target && e.target.classList.contains('order-now-btn')) {
+          const btn = e.target;
+          const slug = btn.getAttribute('data-product-slug');
+          const title = btn.getAttribute('data-product-title');
+          const price = parseInt(btn.getAttribute('data-product-price'));
+          
+          if (slug && title && price) {
+            window.openOrderModal(slug, title, price);
+          }
+        }
+      });
+    });
+  </script>
+
+  <!-- Wedding Room Decoration Ideas & Themes Section -->
+  <section id="ideas" class="py-16 md:py-24 px-4 bg-white">
+    <div class="container mx-auto max-w-6xl">
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 text-gray-900">
+        Wedding Room Decoration Ideas & Themes
+      </h2>
+      <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
+        Every couple is different. Choose from our most popular wedding room decoration ideas or mix elements to create your own theme.
+      </p>
+
+      <div class="grid md:grid-cols-2 gap-8 lg:gap-12">
+        <!-- Idea 1 -->
+        <div class="bg-white rounded-xl overflow-hidden border border-gray-200 hover:shadow-xl transition-all transform hover:-translate-y-1">
+          <div class="aspect-square overflow-hidden bg-gray-100">
+            <img 
+              src="/images/simple-pakistani-wedding-room.webp" 
+              alt="Simple Pakistani Wedding Room Decoration"
+              class="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+              loading="lazy"
+            />
+          </div>
+          <div class="p-6 md:p-8">
+            <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-4">
+              Simple Pakistani Wedding Room Decoration
+            </h3>
+            <ul class="space-y-3 text-base text-gray-600">
+              <li class="flex items-start gap-2">
+                <span class="text-pink-600 mt-1">•</span>
+                <span>Clean, minimal bed decoration with petals</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-pink-600 mt-1">•</span>
+                <span>Few flower vases and soft lighting</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-pink-600 mt-1">•</span>
+                <span>Perfect for simple wedding room decoration at home</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Idea 2 -->
+        <div class="bg-white rounded-xl overflow-hidden border border-gray-200 hover:shadow-xl transition-all transform hover:-translate-y-1">
+          <div class="aspect-square overflow-hidden bg-gray-100">
+            <img 
+              src="/images/romantic-red-gold-theme.webp" 
+              alt="Romantic Red & Gold Theme"
+              class="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+              loading="lazy"
+            />
+          </div>
+          <div class="p-6 md:p-8">
+            <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-4">
+              Romantic Red & Gold Theme
+            </h3>
+            <ul class="space-y-3 text-base text-gray-600">
+              <li class="flex items-start gap-2">
+                <span class="text-red-600 mt-1">•</span>
+                <span>Deep red roses, gold fairy lights, candles</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-red-600 mt-1">•</span>
+                <span>Romantic wedding room decoration for first night</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Idea 3 -->
+        <div class="bg-white rounded-xl overflow-hidden border border-gray-200 hover:shadow-xl transition-all transform hover:-translate-y-1">
+          <div class="aspect-square overflow-hidden bg-gray-100">
+            <img 
+              src="/images/pastel-floral-theme.webp" 
+              alt="Pastel Floral Theme"
+              class="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+              loading="lazy"
+            />
+          </div>
+          <div class="p-6 md:p-8">
+            <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-4">
+              Pastel Floral Theme
+            </h3>
+            <ul class="space-y-3 text-base text-gray-600">
+              <li class="flex items-start gap-2">
+                <span class="text-pink-600 mt-1">•</span>
+                <span>Soft pink, peach and white flowers</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-pink-600 mt-1">•</span>
+                <span>Works for bridal room decoration with flowers and photos</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Idea 4 -->
+        <div class="bg-white rounded-xl overflow-hidden border border-gray-200 hover:shadow-xl transition-all transform hover:-translate-y-1">
+          <div class="aspect-square overflow-hidden bg-gray-100">
+            <img 
+              src="/images/anniversary-honeymoon-theme.webp" 
+              alt="Anniversary & Honeymoon Theme"
+              class="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+              loading="lazy"
+            />
+          </div>
+          <div class="p-6 md:p-8">
+            <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-4">
+              Anniversary & Honeymoon Theme
+            </h3>
+            <ul class="space-y-3 text-base text-gray-600">
+              <li class="flex items-start gap-2">
+                <span class="text-purple-600 mt-1">•</span>
+                <span>Number balloons (1st, 5th, 10th)</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-purple-600 mt-1">•</span>
+                <span>Anniversary room decoration with message banner and flower heart</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Masehri / Saij & Cultural Section -->
+  <section class="py-16 md:py-24 px-4 bg-gradient-to-br from-purple-50 via-pink-50 to-rose-50">
+    <div class="container mx-auto max-w-6xl">
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 text-gray-900">
+        Masehri, Saij & Traditional Bridal Room Decoration
+      </h2>
+      <p class="text-center text-gray-700 mb-8 max-w-3xl mx-auto leading-relaxed">
+        In Lahore and across Pakistan, masehri design, saij design and traditional bridal bedroom décor are a big part of the wedding. Our team specializes in wedding masehri decoration with fabric, fairy lights and fresh flowers – not just balloons.
+      </p>
+
+      <div class="bg-white rounded-xl p-6 md:p-8 shadow-lg border border-purple-200 max-w-3xl mx-auto mb-8">
+        <ul class="space-y-3">
+          <li class="flex items-start gap-3">
+            <svg class="w-6 h-6 text-purple-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+            <span class="text-gray-700">Bed masehri design, canopy and backdrop</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-6 h-6 text-purple-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+            <span class="text-gray-700">Floor seating with cushions and petals</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-6 h-6 text-purple-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+            <span class="text-gray-700">Matching door & sofa flower decoration</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-6 h-6 text-purple-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+            <span class="text-gray-700">Options for simple artificial masehri design if budget is tight</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="text-center">
+        <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all shadow-xl hover:shadow-2xl transform hover:-translate-y-0.5">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          See Traditional Designs on WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section id="how-it-works" class="py-20 md:py-32 px-4 bg-gradient-to-br from-gray-50 via-white to-pink-50/30 relative overflow-hidden">
+    <!-- Decorative background elements -->
+    <div class="absolute inset-0 opacity-5">
+      <div class="absolute top-20 left-10 w-72 h-72 bg-pink-500 rounded-full blur-3xl"></div>
+      <div class="absolute bottom-20 right-10 w-96 h-96 bg-purple-500 rounded-full blur-3xl"></div>
+    </div>
+    
+    <div class="container mx-auto max-w-7xl relative z-10">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-gray-900">
+          How Our Wedding Room Decoration Service in Lahore Works
+        </h2>
+        <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          Simple, professional process from booking to your perfect wedding night room
+        </p>
+      </div>
+
+      <div class="relative">
+        <!-- Timeline line (hidden on mobile, visible on desktop) -->
+        <div class="hidden lg:block absolute top-24 left-0 right-0 h-1 bg-gradient-to-r from-pink-200 via-purple-200 to-pink-200"></div>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
+          <!-- Step 1 -->
+          <div class="relative group">
+            <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 h-full">
+              <!-- Step Number Badge -->
+              <div class="absolute -top-6 left-1/2 transform -translate-x-1/2">
+                <div class="w-14 h-14 bg-gradient-to-br from-pink-600 via-rose-600 to-purple-600 rounded-full flex items-center justify-center shadow-xl border-4 border-white">
+                  <span class="text-2xl font-bold text-white">1</span>
+                </div>
+              </div>
+              
+              <!-- Icon -->
+              <div class="w-20 h-20 bg-gradient-to-br from-pink-100 to-rose-100 rounded-2xl flex items-center justify-center mx-auto mb-6 mt-4 group-hover:scale-110 transition-transform duration-300">
+                <svg class="w-10 h-10 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+              </div>
+              
+              <h3 class="text-2xl font-bold mb-4 text-gray-900 text-center">Share your date & location</h3>
+              <p class="text-gray-600 leading-relaxed text-center">Tell us your area in Lahore (DHA, Bahria Town, Model Town, Johar Town, Faisal Town, Wapda Town, Gulberg, Cantt, etc.) and choose a package.</p>
+            </div>
+          </div>
+          
+          <!-- Step 2 -->
+          <div class="relative group">
+            <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 h-full">
+              <!-- Step Number Badge -->
+              <div class="absolute -top-6 left-1/2 transform -translate-x-1/2">
+                <div class="w-14 h-14 bg-gradient-to-br from-purple-600 via-pink-600 to-rose-600 rounded-full flex items-center justify-center shadow-xl border-4 border-white">
+                  <span class="text-2xl font-bold text-white">2</span>
+                </div>
+              </div>
+              
+              <!-- Icon -->
+              <div class="w-20 h-20 bg-gradient-to-br from-purple-100 to-pink-100 rounded-2xl flex items-center justify-center mx-auto mb-6 mt-4 group-hover:scale-110 transition-transform duration-300">
+                <svg class="w-10 h-10 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/></svg>
+              </div>
+              
+              <h3 class="text-2xl font-bold mb-4 text-gray-900 text-center">Pick theme & colours</h3>
+              <p class="text-gray-600 leading-relaxed text-center">Red & gold, pastel, romantic first-night, simple Pakistani wedding room decoration, or custom.</p>
+            </div>
+          </div>
+          
+          <!-- Step 3 -->
+          <div class="relative group">
+            <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 h-full">
+              <!-- Step Number Badge -->
+              <div class="absolute -top-6 left-1/2 transform -translate-x-1/2">
+                <div class="w-14 h-14 bg-gradient-to-br from-rose-600 via-pink-600 to-purple-600 rounded-full flex items-center justify-center shadow-xl border-4 border-white">
+                  <span class="text-2xl font-bold text-white">3</span>
+                </div>
+              </div>
+              
+              <!-- Icon -->
+              <div class="w-20 h-20 bg-gradient-to-br from-rose-100 to-pink-100 rounded-2xl flex items-center justify-center mx-auto mb-6 mt-4 group-hover:scale-110 transition-transform duration-300">
+                <svg class="w-10 h-10 text-rose-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+              </div>
+              
+              <h3 class="text-2xl font-bold mb-4 text-gray-900 text-center">We decorate your room</h3>
+              <p class="text-gray-600 leading-relaxed text-center">Our team arrives on time, completes full room décor for wedding night in 1–2 hours, and leaves before the couple arrives.</p>
+            </div>
+          </div>
+          
+          <!-- Step 4 -->
+          <div class="relative group">
+            <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 h-full">
+              <!-- Step Number Badge -->
+              <div class="absolute -top-6 left-1/2 transform -translate-x-1/2">
+                <div class="w-14 h-14 bg-gradient-to-br from-green-500 via-emerald-500 to-teal-500 rounded-full flex items-center justify-center shadow-xl border-4 border-white">
+                  <span class="text-2xl font-bold text-white">4</span>
+                </div>
+              </div>
+              
+              <!-- Icon -->
+              <div class="w-20 h-20 bg-gradient-to-br from-green-100 to-emerald-100 rounded-2xl flex items-center justify-center mx-auto mb-6 mt-4 group-hover:scale-110 transition-transform duration-300">
+                <svg class="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              </div>
+              
+              <h3 class="text-2xl font-bold mb-4 text-gray-900 text-center">Enjoy & share photos</h3>
+              <p class="text-gray-600 leading-relaxed text-center">You get a photo-ready wedding night room. We can also keep petals and candles easy to remove for comfort.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Lahore Blooms Section -->
+  <section class="py-20 md:py-32 px-4 bg-gradient-to-br from-white via-rose-50/30 to-pink-50/30 relative overflow-hidden">
+    <!-- Decorative background elements -->
+    <div class="absolute inset-0 opacity-5">
+      <div class="absolute top-10 right-20 w-80 h-80 bg-rose-500 rounded-full blur-3xl"></div>
+      <div class="absolute bottom-10 left-20 w-96 h-96 bg-pink-500 rounded-full blur-3xl"></div>
+    </div>
+    
+    <div class="container mx-auto max-w-7xl relative z-10">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-gray-900">
+          Why Couples Choose Lahore Blooms for Wedding Room Decoration
+        </h2>
+        <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          Trusted by hundreds of couples across Lahore for their most special moments
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Reason 1 -->
+        <div class="group relative">
+          <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 h-full">
+            <!-- Icon Container -->
+            <div class="w-16 h-16 bg-gradient-to-br from-pink-100 to-rose-100 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+              <span class="text-3xl">🌹</span>
+            </div>
+            <h3 class="text-xl font-bold mb-3 text-gray-900">11+ Years of Fresh Flower Experience</h3>
+            <p class="text-gray-600 leading-relaxed">
+              Family business in Lahore now bringing that expertise into wedding room & bridal décor
+            </p>
+          </div>
+        </div>
+
+        <!-- Reason 2 -->
+        <div class="group relative">
+          <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 h-full">
+            <!-- Icon Container -->
+            <div class="w-16 h-16 bg-gradient-to-br from-purple-100 to-pink-100 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+              <span class="text-3xl">💒</span>
+            </div>
+            <h3 class="text-xl font-bold mb-3 text-gray-900">Specialized in Room Decoration</h3>
+            <p class="text-gray-600 leading-relaxed">
+              We decorate bedrooms, masehri/saij, hotel rooms and home setups for first night, bridal entry and anniversaries – not just bouquets
+            </p>
+          </div>
+        </div>
+
+        <!-- Reason 3 -->
+        <div class="group relative">
+          <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 h-full">
+            <!-- Icon Container -->
+            <div class="w-16 h-16 bg-gradient-to-br from-blue-100 to-purple-100 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+              <span class="text-3xl">📸</span>
+            </div>
+            <h3 class="text-xl font-bold mb-3 text-gray-900">Real Work, Real Lahore Couples</h3>
+            <p class="text-gray-600 leading-relaxed">
+              All photos on this page come from our actual clients in Lahore, not stock images
+            </p>
+          </div>
+        </div>
+
+        <!-- Reason 4 -->
+        <div class="group relative">
+          <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 h-full">
+            <!-- Icon Container -->
+            <div class="w-16 h-16 bg-gradient-to-br from-amber-100 to-orange-100 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+              <span class="text-3xl">🕒</span>
+            </div>
+            <h3 class="text-xl font-bold mb-3 text-gray-900">Reliable Timing on Wedding Days</h3>
+            <p class="text-gray-600 leading-relaxed">
+              We coordinate with your family, hotel or home so the room is ready before the bride & groom arrive
+            </p>
+          </div>
+        </div>
+
+        <!-- Reason 5 -->
+        <div class="group relative">
+          <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 h-full">
+            <!-- Icon Container -->
+            <div class="w-16 h-16 bg-gradient-to-br from-green-100 to-emerald-100 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+              <span class="text-3xl">🧹</span>
+            </div>
+            <h3 class="text-xl font-bold mb-3 text-gray-900">Clean & Safe Setup</h3>
+            <p class="text-gray-600 leading-relaxed">
+              No wax on bedsheets, careful with tape and walls, and we tidy up petals/packing so the room stays comfortable
+            </p>
+          </div>
+        </div>
+
+        <!-- Reason 6 -->
+        <div class="group relative">
+          <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 h-full">
+            <!-- Icon Container -->
+            <div class="w-16 h-16 bg-gradient-to-br from-teal-100 to-cyan-100 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+              <span class="text-3xl">💬</span>
+            </div>
+            <h3 class="text-xl font-bold mb-3 text-gray-900">WhatsApp-First Support</h3>
+            <p class="text-gray-600 leading-relaxed">
+              Send us your own wedding room decoration ideas, Pinterest screenshots or AI images, and we'll match them to your budget and location in Lahore
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Service Areas / GEO Section -->
+  <section id="areas" class="py-20 md:py-32 px-4 bg-gradient-to-br from-white via-purple-50/20 to-pink-50/20 relative overflow-hidden">
+    <!-- Decorative background elements -->
+    <div class="absolute inset-0 opacity-5">
+      <div class="absolute top-20 left-10 w-96 h-96 bg-purple-500 rounded-full blur-3xl"></div>
+      <div class="absolute bottom-20 right-10 w-80 h-80 bg-pink-500 rounded-full blur-3xl"></div>
+    </div>
+    
+    <div class="container mx-auto max-w-7xl relative z-10">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-gray-900">
+          Areas We Cover in Lahore
+        </h2>
+        <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-4">
+          We provide this bedroom décor service throughout Lahore
+        </p>
+        <p class="text-base text-gray-500 max-w-2xl mx-auto">
+          Here are some of the areas we frequently serve:
+        </p>
+      </div>
+      
+      <div class="grid md:grid-cols-3 lg:grid-cols-4 gap-5 mb-12">
+        {['College Road', 'Township', 'Green Town', 'Bahria Town', 'Valencia Town', 'Wapda Town', 'Johar Town', 'DHA', 'Model Town', 'Gulberg', 'Faisal Town', 'Iqbal Town', 'Shadman', 'Cantt', 'Garden Town', 'Allama Iqbal Town'].map((area) => (
+          <div class="group bg-white rounded-xl p-5 shadow-md border border-gray-100 hover:shadow-xl hover:border-pink-300 transition-all duration-300 transform hover:-translate-y-1">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 bg-gradient-to-br from-pink-100 to-purple-100 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                <svg class="w-5 h-5 text-pink-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/></svg>
+              </div>
+              <span class="text-gray-800 font-semibold text-base">{area}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+      
+      <div class="text-center bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-gray-100 max-w-2xl mx-auto">
+        <p class="text-gray-700 text-lg mb-2">
+          Don't see your area?
+        </p>
+        <p class="text-gray-600">
+          <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="text-pink-600 hover:text-pink-700 font-bold text-lg underline decoration-2 underline-offset-2 transition-colors">
+            Contact us on WhatsApp
+          </a>
+          <span class="text-gray-600"> – we may still be able to serve you!</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials / Reviews Section -->
+  <section id="reviews" class="py-20 md:py-32 px-4 bg-gradient-to-br from-white via-pink-50/30 to-rose-50/30 relative overflow-hidden">
+    <!-- Decorative background elements -->
+    <div class="absolute inset-0 opacity-5">
+      <div class="absolute top-10 right-20 w-96 h-96 bg-rose-500 rounded-full blur-3xl"></div>
+      <div class="absolute bottom-10 left-20 w-80 h-80 bg-pink-500 rounded-full blur-3xl"></div>
+    </div>
+    
+    <div class="container mx-auto max-w-7xl relative z-10">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-gray-900">
+          Real Reviews from Wedding Room Decoration Clients in Lahore
+        </h2>
+        <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          Trusted by couples across Lahore for their most special moments
+        </p>
+      </div>
+      
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <!-- Review 1 -->
+        <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+          <div class="flex items-center gap-1 mb-4">
+            {[1, 2, 3, 4, 5].map(() => (
+              <svg class="w-6 h-6 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            ))}
+          </div>
+          <p class="text-gray-700 mb-6 italic leading-relaxed text-lg">"I booked from Dubai for my sister's bridal room decoration in Lahore. Everything was exactly like the pictures and on time."</p>
+          <div class="flex items-center gap-3 pt-4 border-t border-gray-100">
+            <div class="w-12 h-12 bg-gradient-to-br from-pink-100 to-rose-100 rounded-full flex items-center justify-center">
+              <span class="text-xl font-bold text-pink-600">A</span>
+            </div>
+            <div>
+              <div class="font-bold text-gray-900">Ayesha</div>
+              <div class="text-sm text-gray-500">DHA Lahore</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review 2 -->
+        <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+          <div class="flex items-center gap-1 mb-4">
+            {[1, 2, 3, 4, 5].map(() => (
+              <svg class="w-6 h-6 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            ))}
+          </div>
+          <p class="text-gray-700 mb-6 italic leading-relaxed text-lg">"We chose the romantic first night room decoration package. The bed, lights and petals were perfect. Highly recommended."</p>
+          <div class="flex items-center gap-3 pt-4 border-t border-gray-100">
+            <div class="w-12 h-12 bg-gradient-to-br from-purple-100 to-pink-100 rounded-full flex items-center justify-center">
+              <span class="text-xl font-bold text-purple-600">H</span>
+            </div>
+            <div>
+              <div class="font-bold text-gray-900">Hamza & Maryam</div>
+              <div class="text-sm text-gray-500">Johar Town</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review 3 -->
+        <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+          <div class="flex items-center gap-1 mb-4">
+            {[1, 2, 3, 4, 5].map(() => (
+              <svg class="w-6 h-6 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            ))}
+          </div>
+          <p class="text-gray-700 mb-6 italic leading-relaxed text-lg">"Booked simple wedding room decoration at home as we were on a budget. Still looked premium and fresh."</p>
+          <div class="flex items-center gap-3 pt-4 border-t border-gray-100">
+            <div class="w-12 h-12 bg-gradient-to-br from-rose-100 to-pink-100 rounded-full flex items-center justify-center">
+              <span class="text-xl font-bold text-rose-600">S</span>
+            </div>
+            <div>
+              <div class="font-bold text-gray-900">Sana</div>
+              <div class="text-sm text-gray-500">Model Town</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section id="faq" class="py-20 md:py-32 px-4 bg-gradient-to-br from-white via-pink-50/20 to-rose-50/20 relative overflow-hidden">
+    <!-- Decorative background elements -->
+    <div class="absolute inset-0 opacity-5">
+      <div class="absolute top-20 left-10 w-80 h-80 bg-pink-500 rounded-full blur-3xl"></div>
+      <div class="absolute bottom-20 right-10 w-96 h-96 bg-purple-500 rounded-full blur-3xl"></div>
+    </div>
+    
+    <div class="container mx-auto max-w-7xl relative z-10">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-gray-900">
+          Frequently Asked Questions
+        </h2>
+        <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          Everything you need to know about our wedding room decoration service
+        </p>
+      </div>
+      
+      <div class="grid lg:grid-cols-2 gap-8 lg:gap-12">
+        <!-- FAQ Block 1 – Service FAQs -->
+        <div>
+          <h3 class="text-2xl md:text-3xl font-bold mb-8 text-gray-900">
+            Service FAQs – Lahore Blooms Room Décor
+          </h3>
+          <div class="space-y-6">
+            {faqs.slice(0, Math.ceil(faqs.length / 2)).map(faq => (
+              <div class="bg-white rounded-xl p-6 shadow-lg border border-gray-100 hover:shadow-xl hover:border-pink-200 transition-all duration-300">
+                <h4 class="text-xl font-bold mb-3 text-gray-900">{faq.question}</h4>
+                <p class="text-gray-600 leading-relaxed">{faq.answer}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- FAQ Block 2 – Decoration Ideas & General Questions -->
+        <div>
+          <h3 class="text-2xl md:text-3xl font-bold mb-8 text-gray-900">
+            Decoration Ideas – Wedding Room, Bridal Room & First Night FAQs
+          </h3>
+          <div class="space-y-6">
+            {faqs.slice(Math.ceil(faqs.length / 2)).map(faq => (
+              <div class="bg-white rounded-xl p-6 shadow-lg border border-gray-100 hover:shadow-xl hover:border-pink-200 transition-all duration-300">
+                <h4 class="text-xl font-bold mb-3 text-gray-900">{faq.question}</h4>
+                <p class="text-gray-600 leading-relaxed">{faq.answer}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA Section -->
+  <section class="py-20 md:py-32 px-4 bg-pink-600 text-white relative overflow-hidden">
+    <!-- Decorative background elements -->
+    <div class="absolute inset-0 opacity-10">
+      <div class="absolute top-10 left-10 w-96 h-96 bg-white rounded-full blur-3xl"></div>
+      <div class="absolute bottom-10 right-10 w-80 h-80 bg-white rounded-full blur-3xl"></div>
+    </div>
+    
+    <div class="container mx-auto max-w-5xl text-center relative z-10">
+      <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+        Ready to Book Your Wedding Room Decoration in Lahore?
+      </h2>
+      <p class="text-lg md:text-xl mb-12 opacity-95 max-w-3xl mx-auto leading-relaxed">
+        Whether you need a simple wedding room decoration with flowers or a full romantic first-night room setup, our team is ready to help. Share your date, area and budget – we'll reply on WhatsApp with ideas and prices.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-6 justify-center">
+        <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="bg-white hover:bg-gray-50 text-pink-600 px-10 py-5 rounded-full font-bold text-lg transition-all flex items-center justify-center gap-3 shadow-2xl hover:shadow-3xl transform hover:-translate-y-1">
+          <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          WhatsApp Us Now
+        </a>
+        <a href="#packages" class="bg-pink-700 hover:bg-pink-800 text-white px-10 py-5 rounded-full font-bold text-lg transition-all flex items-center justify-center gap-3 shadow-2xl hover:shadow-3xl border-2 border-pink-500/50 transform hover:-translate-y-1">
+          <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          Get Package & Price List
+        </a>
+      </div>
+    </div>
+  </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-gray-300 py-16 px-4 relative overflow-hidden">
+    <!-- Decorative background elements -->
+    <div class="absolute inset-0 opacity-5">
+      <div class="absolute top-10 right-10 w-72 h-72 bg-pink-500 rounded-full blur-3xl"></div>
+      <div class="absolute bottom-10 left-10 w-80 h-80 bg-purple-500 rounded-full blur-3xl"></div>
+    </div>
+    
+    <div class="container mx-auto max-w-7xl relative z-10">
+      <div class="grid md:grid-cols-4 gap-8 lg:gap-12 mb-12">
+        <div>
+          <h3 class="text-2xl font-bold text-white mb-4 bg-gradient-to-r from-pink-400 to-rose-400 bg-clip-text text-transparent">
+            Lahore Blooms
+          </h3>
+          <p class="text-base mb-4 text-gray-400">Wedding Room Decoration Lahore</p>
+          <p class="text-sm text-gray-400 leading-relaxed">
+            Professional bridal room decoration with fresh flowers, candles, and fairy lights. Serving Lahore with multiple convenient branches.
+          </p>
+        </div>
+        <div>
+          <h4 class="text-lg font-bold text-white mb-6">Contact</h4>
+          <div class="space-y-3">
+            <p class="text-base">
+              <a href={`tel:${phoneNumber}`} class="hover:text-pink-400 transition-colors flex items-center gap-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                {phoneNumber}
+              </a>
+            </p>
+            <p class="text-base">
+              <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="hover:text-pink-400 transition-colors flex items-center gap-2">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                WhatsApp Us
+              </a>
+            </p>
+          </div>
+        </div>
+        <div>
+          <h4 class="text-lg font-bold text-white mb-6">Service Areas</h4>
+          <p class="text-sm text-gray-400 leading-relaxed">
+            DHA, Bahria Town, Model Town, Gulberg, Johar Town, Cantt, Faisal Town, Wapda Town, Garden Town, Township, Green Town, Valencia Town, Iqbal Town, Shadman, College Road, Allama Iqbal Town & more.
+          </p>
+          <p class="text-sm text-pink-400 mt-4">
+            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="hover:text-pink-300 transition-colors underline">
+              Check your area →
+            </a>
+          </p>
+        </div>
+        <div>
+          <h4 class="text-lg font-bold text-white mb-6">Links</h4>
+          <ul class="text-sm space-y-3">
+            <li><a href="https://lahoreblooms.com" target="_blank" rel="noopener noreferrer" class="hover:text-pink-400 transition-colors">Main Website</a></li>
+            <li><a href="/privacy-policy" class="hover:text-pink-400 transition-colors">Privacy Policy</a></li>
+            <li><a href="/terms" class="hover:text-pink-400 transition-colors">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-gray-700 pt-8 text-center">
+        <p class="text-sm text-gray-400">&copy; {new Date().getFullYear()} Lahore Blooms. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bottom padding for mobile sticky bar -->
+  <div class="md:hidden h-20"></div>
+
+</body>
+</html>
+
