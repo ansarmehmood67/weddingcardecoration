@@ -15,7 +15,7 @@ if (!product) {
   return Astro.redirect('/404');
 }
 
-const siteUrl = 'https://weddingroomdecoration.com';
+const siteUrl = 'https://weddingcardecorations.com';
 const phoneNumber = '+923227555459';
 const whatsappNumber = '923227555459';
 const whatsappMessage = encodeURIComponent(`Hi! I'm interested in ${product.title} (Rs ${product.price.toLocaleString()}). Can you help me?`);
@@ -132,7 +132,7 @@ const breadcrumbSchema = {
   <link rel="dns-prefetch" href="https://fonts.googleapis.com">
   <link rel="dns-prefetch" href="https://fonts.gstatic.com">
   
-  <title>{product.title} | Wedding Room Decoration Lahore | Lahore Blooms</title>
+  <title>{product.title} | Wedding Car Decoration Lahore | Lahore Blooms</title>
   
   <!-- JSON-LD Schemas -->
   <script type="application/ld+json" set:html={JSON.stringify(productSchema)} />
@@ -156,7 +156,7 @@ const breadcrumbSchema = {
         <a href="/" class="text-2xl font-bold bg-gradient-to-r from-pink-600 to-rose-600 bg-clip-text text-transparent">
           Lahore Blooms
         </a>
-        <span class="text-xs text-gray-500 font-medium">Wedding Room Decoration in Lahore</span>
+        <span class="text-xs text-gray-500 font-medium">Wedding Car Decoration in Lahore</span>
       </div>
       <nav class="hidden lg:flex items-center gap-6">
         <a href="/#packages" class="text-gray-700 hover:text-pink-600 transition-colors font-medium text-sm">Designs</a>
@@ -280,7 +280,7 @@ const breadcrumbSchema = {
 
           <div class="mt-6 p-4 bg-pink-50 rounded-lg">
             <p class="text-sm text-gray-700">
-              <strong>Note:</strong> Price may vary based on room size and customization. Pay after decoration service available. Same-day service subject to availability.
+              <strong>Note:</strong> Price may vary based on car model, size and customization. Pay after decoration service available. Same-day service subject to availability.
             </p>
           </div>
         </div>
@@ -324,7 +324,7 @@ const breadcrumbSchema = {
         <form id="order-form" onsubmit="window.submitOrder(event)" class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
           <div class="sm:flex sm:items-start">
             <div class="mt-3 text-center sm:mt-0 sm:text-left w-full">
-              <h3 class="text-2xl font-bold text-gray-900 mb-4" id="modal-title">Order Wedding Room Decoration</h3>
+              <h3 class="text-2xl font-bold text-gray-900 mb-4" id="modal-title">Order Wedding Car Decoration</h3>
               <div class="mb-4">
                 <p class="text-lg font-semibold text-pink-600" id="modal-product-title"></p>
                 <p class="text-gray-600" id="modal-product-price"></p>
@@ -414,7 +414,7 @@ const breadcrumbSchema = {
       const data = Object.fromEntries(formData.entries());
       
       const whatsappNumber = '923227555459';
-      const message = '*Wedding Room Decoration Order*\n\n' +
+      const message = '*Wedding Car Decoration Order*\n\n' +
         '*Design:* ' + data.design + '\n' +
         '*Name:* ' + data.name + '\n' +
         '*Phone:* ' + data.phone + '\n' +

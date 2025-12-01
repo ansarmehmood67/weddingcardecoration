@@ -2,10 +2,10 @@
 import { products } from '../data/products';
 
 // SEO and metadata
-const siteUrl = 'https://weddingroomdecoration.com';
+const siteUrl = 'https://weddingcardecorations.com';
 const phoneNumber = '+923227555459';
 const whatsappNumber = '923227555459';
-const whatsappMessage = encodeURIComponent('Hi! I\'m interested in wedding room decoration in Lahore. Can you help me?');
+const whatsappMessage = encodeURIComponent('Hi! I\'m interested in wedding car decoration in Lahore. Can you help me?');
 const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
 
 // Products display settings
@@ -15,108 +15,76 @@ const productsPerLoad = 12; // Load 12 more products each time
 // FAQ data for JSON-LD
 const faqs = [
   {
-    question: "What is the price of wedding room decoration in Lahore?",
-    answer: "Our simple wedding room decoration at home starts from Rs 6,000 and romantic first-night or luxury honeymoon decoration can go from Rs 9,500+. Final price depends on area in Lahore, timing, flowers, lights and design. Share your location and a photo or reference and we'll send exact options on WhatsApp."
+    question: "What types of wedding car decoration do you offer in Lahore?",
+    answer: "We offer simple car ribbon decoration, bridal car ribbon and bows, full fresh flower wedding car decoration, dulha & dulhan car setups, barat car decoration, black car wedding decoration, pastel themes, 4x4 wedding car décor (Fortuner, Sportage etc.) and luxury Audi / BMW / Mercedes wedding car designs."
   },
   {
-    question: "Which areas of Lahore do you cover for wedding room decoration?",
-    answer: "We decorate wedding rooms in Lahore across DHA, Cantt, Bahria Town, NFC, Model Town, Faisal Town, Township, Johar Town, Wapda Town, Garden Town, Gulberg and nearby areas. If you're slightly outside these zones, message us on WhatsApp and we'll confirm."
+    question: "Do you provide \"car decoration for wedding near me\" in my area?",
+    answer: "Yes. We cover most areas of Lahore including College Road, Township, Johar Town, Wapda Town, Bahria Town, DHA, Model Town, Gulberg, Cantt, Garden Town and nearby societies. Share your exact location on WhatsApp and we'll confirm service."
   },
   {
-    question: "Do you decorate rooms at home, hotels or guest houses?",
-    answer: "Yes. We provide wedding room decoration at home in Lahore, hotel rooms and guest houses, as long as the location allows outside decorators to enter at your booked time."
+    question: "How much does wedding car decoration cost in Lahore?",
+    answer: "Simple car decoration with ribbon and ready-made wedding car bows starts from around Rs 2,500. Fresh flower bridal car decoration usually starts from Rs 5,000–7,000 depending on car size, flower choice and design. Packages for multiple barat cars or luxury cars (BMW, Audi, Fortuner) are priced after we know your details."
   },
   {
-    question: "Do you offer low-budget wedding room decoration packages?",
-    answer: "Yes. We have low-budget wedding room decoration options with rose petals, simple flower work and fairy lights so you still get a special first-night setup without spending too much. Tell us your budget and we'll suggest designs accordingly."
+    question: "Can I choose between artificial and fresh flowers for my wedding car?",
+    answer: "Yes. Most couples prefer fresh flower car decoration with roses, motia and seasonal flowers, but we also offer artificial flower options for long routes or if you want a lower budget. We'll show you sample photos for both."
   },
   {
-    question: "Do you use fresh flowers or artificial flowers?",
-    answer: "Our main designs use fresh flowers for the bed, petals and vases. We can also mix some artificial flower decoration for backdrops or masehri if you want to reduce cost or need the décor to stay fresh for many hours."
+    question: "Which flowers are commonly used for wedding car decorations in Lahore?",
+    answer: "Red and white roses, baby's-breath, gypsophila, motia gajras, marigold (genda) and seasonal mixed flowers are the most popular. For pastel themes we use peach, pink and cream flowers to match your bridal dress and ribbons."
   },
   {
-    question: "Can I customize the colours, flowers and theme?",
-    answer: "Yes. You can send us wedding room decoration ideas, Pinterest screenshots, AI images or examples from Instagram, and we'll match or adapt the design based on your budget and flower availability in Lahore."
+    question: "Do you decorate all car models – Alto, Civic, Audi, BMW, Fortuner, Baleno, Brezza, Bolero, Kia Sportage, etc.?",
+    answer: "Yes, we regularly decorate small cars like Alto and Mehran, sedans like Civic, City and Corolla, crossovers like Sportage and BR-V, 4x4s like Fortuner and Prado, and luxury cars including Audi, BMW and Mercedes. We adjust the design to the shape of each vehicle so it looks balanced from every angle."
   },
   {
-    question: "How early should I book my wedding room decoration?",
-    answer: "If your date is fixed, it's best to book 3–7 days before the event. For very busy seasons (Shaadi / Baraat peak days), even earlier is better. For same-day wedding room decoration in Lahore, message us on WhatsApp and we'll confirm only if a team is free."
+    question: "Can you do black car decoration for wedding?",
+    answer: "Of course. Black wedding car decoration is very popular in Lahore. We usually create a strong contrast with red or white flowers and gold or silver wedding car ribbons and bows so the design stands out in photos."
   },
   {
-    question: "How long does it take to decorate the room?",
-    answer: "Most wedding night room decoration setups take around 1–2 hours, depending on design and size of the room. We coordinate time with your family to make sure the couple doesn't see the room before it's ready."
+    question: "Do you offer simple, budget-friendly \"car decoration for marriage simple\"?",
+    answer: "Yes. If you just want a neat look without heavy flowers, we recommend a simple package with car ribbon decoration, a central bonnet bouquet and a few side accents. It keeps the car elegant and is easy on the budget."
   },
   {
-    question: "How do I book and pay?",
-    answer: "You can book through WhatsApp or the Order Now form. Usually we take a small advance (JazzCash/Bank Transfer) to confirm your slot and the remaining amount in cash or transfer after the decoration is completed."
+    question: "How early should I book wedding car decoration services in Lahore?",
+    answer: "For peak wedding months, it's best to book at least 1–2 weeks in advance, especially if you need multiple cars or luxury models. Last-minute bookings are possible if our team is free, but early booking secures your time slot and best price."
   },
   {
-    question: "Do you also decorate for anniversary and honeymoon stays?",
-    answer: "Yes. Our anniversary room decoration and honeymoon bedroom decoration options are very popular for surprise celebrations in Lahore. Just mention if it's an anniversary, welcome-back, honeymoon or first-night, and we'll style the message and décor accordingly."
+    question: "Can I customize my wedding car decoration theme?",
+    answer: "Yes, every bridal car design is customizable. You can choose colours, type of flowers, level of coverage (simple, medium, full) and add details like name ribbons, initials, bride & groom tags or special messages."
   },
   {
-    question: "How do I decorate a wedding room at home on a low budget?",
-    answer: "Focus on three elements: Bed decoration with petals (heart shape, border or simple scatter), One wall or headboard with fairy lights, A few flower points (side tables, dressing or entrance). Even with limited budget, this gives a clean, romantic simple wedding room decoration at home."
+    question: "Do you provide eco-friendly wedding car decoration in Lahore?",
+    answer: "We can use more natural materials like fresh flowers, fabric ribbons and biodegradable tape instead of plastic items where possible. If you specifically want eco-friendly options, tell us on WhatsApp and we'll design accordingly."
   },
   {
-    question: "What is the best colour theme for wedding room decoration?",
-    answer: "The most requested themes in Lahore are: Red & gold – classic romantic first-night look, White & pastel pink/peach – soft, elegant bridal vibe, All-red roses – strong, dramatic wedding night room. The best theme depends on the bedsheet colour, wall colour and the couple's taste."
+    question: "Do you also decorate barat and family cars or only the main bridal car?",
+    answer: "We decorate all cars – dulha car, dulhan car, parents' cars and barati cars. Many families choose one premium bridal car decoration and simple ribbon car decor for the rest of the barat line."
   },
   {
-    question: "How can I make wedding room decoration look romantic but not overdone?",
-    answer: "Use flowers + lights + 1 focal point instead of filling every corner. A beautiful bed design with petals, a clean fairy light wall and a few candles or lamps give a romantic look without feeling crowded or cheap."
+    question: "Can you combine wedding car decoration with other wedding decoration services?",
+    answer: "Yes, we can provide package deals for multiple cars including dulha car, dulhan car, barat cars, and family cars. We can also coordinate with your venue decoration team to match themes and colors. Share what you need and we'll send a combined quote for all your car decoration needs."
   },
   {
-    question: "What is the difference between bridal room decoration and wedding night decoration?",
-    answer: "Bridal room decoration usually focuses on masehri / saij design, backdrop, cushions and the whole room for daytime photos. Wedding night / first-night decoration focuses more on the bed, lights and mood when the couple arrives at night. Most families in Lahore now choose both: daytime bridal room + night-time romantic setup."
+    question: "Do you provide groom car decor and \"dulha car decoration\" for baraat departure?",
+    answer: "Yes. Groom car decoration is one of our most requested services. We design dulha car flower arrangements that look strong in videos when the barat leaves the street and arrives at the hall."
   },
   {
-    question: "How do I decorate a small bedroom for the wedding night?",
-    answer: "For small rooms, avoid heavy structures. Instead: Use wall fairy lights behind the bed, Create a petal path from the door to the bed, Add small flower vases or jars instead of big stands. Small spaces look very good in photos if the bed and wall behind it are decorated nicely."
+    question: "How do I book wedding car decoration online?",
+    answer: "You can message us on WhatsApp with your date, area, car model and reference photos. We'll suggest 2–3 designs with prices. Once you confirm, we take a small advance and reserve your time slot. On the wedding day our team arrives at the agreed location to decorate the car."
   },
   {
-    question: "What items are needed for wedding room decoration?",
-    answer: "Basic wedding room decoration items include: Fresh flowers (roses, baby's breath, gypso, etc.), Petals for bed and floor, Fairy lights and/or lamps, Candles or LED candles, Ribbons, fabric, tape, pins (for masehri / backdrop), Optional: balloons, banners, initials or name lights. When you book with Lahore Blooms, we bring all the required items for the chosen design."
+    question: "Where can I see reviews of your wedding car decoration service in Lahore?",
+    answer: "You can view photos, client messages and reviews on our WhatsApp and social pages. When you contact us, we'll share real screenshots from Lahore couples who've used our dulha, dulhan and barat car decoration service."
   },
   {
-    question: "Which is better: fresh flower or artificial flower room decoration?",
-    answer: "Fresh flowers look and smell better in real life and photos, but last fewer hours. Artificial flowers work well for backdrops or when the setup must stay for a long time or in very hot rooms. Most couples choose a mix: fresh flowers for bed and close shots, artificial for some background elements."
+    question: "Do you provide car decoration for Christian, Hindu or Bengali weddings in Lahore?",
+    answer: "Yes. We work with all communities and can match your cultural style – from simple cross-style car bouquets for Christian weddings to traditional genda and red-gold themes for Pakistani and Bengali weddings."
   },
   {
-    question: "Can I reuse some of the wedding room decoration for the next morning or photos?",
-    answer: "Yes. Many couples keep part of the flower room decoration (vases, some petals and the backdrop) for next-morning photos. Just remove petals from the bed when you want to sleep comfortably, and keep the rest for morning pictures."
-  },
-  {
-    question: "What is included in your bridal / wedding room decoration packages in Lahore?",
-    answer: "Our packages include complete room styling: backdrop, flowers, balloons (if selected), LED fairy lights, candles or lamps, bed styling, side tables, and entrance décor. You choose the design from our catalog, and we handle everything from setup to clean finish, so the room is ready when the bride arrives."
-  },
-  {
-    question: "Do you offer emergency or last-minute bridal room decoration services in Lahore?",
-    answer: "Yes, we try our best to help with emergency bridal room decoration. If your decorator cancelled or you decided late, contact us with your location and room photos. If our team is free, we can arrange a fast setup with limited but beautiful options."
-  },
-  {
-    question: "Can I get custom themes like royal, modern, or traditional Pakistani bridal room décor?",
-    answer: "Yes. We create royal, modern minimal, romantic, and traditional Pakistani bridal room themes with colors like red, maroon, gold, blush pink, white, and more. You can also share your own reference pictures—we'll adapt the theme to your room size and budget."
-  },
-  {
-    question: "Do you provide lights, candles, and LED options for bridal room decoration in Lahore?",
-    answer: "Yes, lighting is a big part of our designs. We use warm LED fairy lights, lamps, candles (real or LED), and sometimes neon text signs depending on the package. If you want a soft, romantic lighting look or a bright, Instagram-style setup, we can design it accordingly."
-  },
-  {
-    question: "Is setup and removal included in the bridal room decoration price?",
-    answer: "Yes. Our team comes, sets up the full decoration, and explains which items are returnable (like stands, frames, some props). After the event—either the same night or next day as agreed—we collect the rental items. This service is included in the package price unless otherwise mentioned."
-  },
-  {
-    question: "Can I see your previous bridal room decoration work before booking?",
-    answer: "Of course. We have a portfolio of real bridal room decorations in Lahore with before/after pictures. You can view them on our website gallery and we can also send recent work samples directly on WhatsApp so you feel confident about the result."
-  },
-  {
-    question: "Do you offer discounts or special offers on bridal room decoration in Lahore?",
-    answer: "Sometimes we run seasonal or combo offers, especially if you book bridal room + car decoration + bouquet together. For the latest discounts or packages, just send us a message on WhatsApp and we'll share any active deals."
-  },
-  {
-    question: "How do I contact you for bridal room decoration in Lahore?",
-    answer: "You can send us a WhatsApp message (preferred) or fill the short \"Order Now\" form on this page with your name, event date, location, and room photos. We'll reply with ideas, price, and available slots. If you have any questions, just ask—we're happy to guide you."
+    question: "What if it rains on my wedding day – will the car decoration be okay?",
+    answer: "For rainy days we suggest slightly tighter designs and stronger fixing methods. We avoid very heavy vertical arrangements and use flowers that handle weather better. If forecast is very bad, we'll guide you on safer decoration options."
   }
 ];
 
@@ -124,13 +92,13 @@ const faqs = [
 const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
-  "name": "Lahore Blooms – Wedding Room Decoration Lahore",
-  "description": "Professional wedding room decoration service in Lahore. Fresh flowers, bridal room décor, first-night setups, masehri design, and honeymoon bedroom decoration. Serving College Road, Township, Green Town, Bahria Town, Valencia Town, Wapda Town, Johar Town, DHA, Model Town, Gulberg, Faisal Town, Iqbal Town, Shadman, Cantt, Garden Town, Allama Iqbal Town and all areas of Lahore.",
+  "name": "Lahore Blooms – Wedding Car Decoration Lahore",
+  "description": "Professional wedding car decoration service in Lahore. Fresh flowers, bridal car décor, dulha & dulhan car decoration, barat car decoration, and luxury car decoration. Serving College Road, Township, Green Town, Bahria Town, Valencia Town, Wapda Town, Johar Town, DHA, Model Town, Gulberg, Faisal Town, Iqbal Town, Shadman, Cantt, Garden Town, Allama Iqbal Town and all areas of Lahore.",
   "url": siteUrl,
   "telephone": phoneNumber,
-  "priceRange": "Rs 6,000+",
-  "image": `${siteUrl}/images/hero-bg .webp`,
-  "logo": `${siteUrl}/images/hero-bg .webp`,
+  "priceRange": "Rs 2,500+",
+  "image": `${siteUrl}/images/hero-bg.webp`,
+  "logo": `${siteUrl}/images/hero-bg.webp`,
   "areaServed": [
     {
       "@type": "City",
@@ -359,8 +327,8 @@ const organizationSchema = {
   "@type": "Organization",
   "name": "Lahore Blooms",
   "url": siteUrl,
-  "logo": `${siteUrl}/images/hero-bg .webp`,
-  "description": "Professional wedding room decoration service in Lahore. Fresh flowers, bridal room décor, first-night setups, masehri design, and honeymoon bedroom decoration.",
+  "logo": `${siteUrl}/images/hero-bg.webp`,
+  "description": "Professional wedding car decoration service in Lahore. Fresh flowers, bridal car décor, dulha & dulhan car decoration, barat car decoration, and luxury car decoration.",
   "contactPoint": {
     "@type": "ContactPoint",
     "telephone": phoneNumber,
@@ -377,7 +345,7 @@ const organizationSchema = {
 const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  "name": "Lahore Blooms - Wedding Room Decoration Lahore",
+  "name": "Lahore Blooms - Wedding Car Decoration Lahore",
   "url": siteUrl,
   "potentialAction": {
     "@type": "SearchAction",
@@ -394,8 +362,8 @@ const serviceSchemas = [
   {
     "@context": "https://schema.org",
     "@type": "Service",
-    "name": "Bridal, Wedding Night & Masehri Room Decoration",
-    "description": "Complete wedding room decoration in Lahore for the bride and groom – one service that covers bridal room décor, wedding night / suhagrat setup and traditional masehri / saij design. Fresh flowers, petals, fairy lights and fabric styling.",
+    "name": "Dulha & Dulhan Car Decoration",
+    "description": "Complete bridal car decoration in Lahore for dulha and dulhan – one service that covers car bonnet bouquet, side flower strings, rear window décor and matching wedding car ribbon. Fresh roses, motia, gajra-style strings and long wedding car flowers.",
     "provider": {
       "@type": "LocalBusiness",
       "name": "Lahore Blooms"
@@ -407,14 +375,14 @@ const serviceSchemas = [
     "offers": {
       "@type": "Offer",
       "priceCurrency": "PKR",
-      "priceRange": "Rs 6,000+"
+      "priceRange": "Rs 3,000+"
     }
   },
   {
     "@context": "https://schema.org",
     "@type": "Service",
-    "name": "Anniversary Room Decoration",
-    "description": "Special anniversary room decoration with numbers, message banner and fresh flowers. Perfect for couples celebrating 1st, 5th, 10th or any year – at home or hotel in Lahore – with a romantic yet comfortable bedroom setup.",
+    "name": "Barat & Family Car Decoration",
+    "description": "Special barat car decoration packages with a mix of simple car ribbon decoration and fresh flower accents. Perfect for families who want all cars in the barat line to look coordinated – from simple car decoration for wedding to more detailed designs for parents and siblings.",
     "provider": {
       "@type": "LocalBusiness",
       "name": "Lahore Blooms"
@@ -426,14 +394,14 @@ const serviceSchemas = [
     "offers": {
       "@type": "Offer",
       "priceCurrency": "PKR",
-      "priceRange": "Rs 6,000+"
+      "priceRange": "Rs 3,000+"
     }
   },
   {
     "@context": "https://schema.org",
     "@type": "Service",
-    "name": "Honeymoon Bedroom Decoration",
-    "description": "Premium honeymoon bedroom decoration for newly-weds and couples visiting Lahore. Includes romantic honeymoon bed design with roses, petals and soft lighting so your stay starts with a beautiful surprise.",
+    "name": "Luxury Wedding Car & 4x4 Decoration",
+    "description": "Premium wedding car decoration for luxury cars and 4x4s. We design for Audi, BMW, Mercedes, Fortuner, Sportage, Kia, Prado and other high-end cars with care so the paint and body are protected. Options for full flower décor, minimal bonnet bouquet, or elegant wedding car ribbons and bows.",
     "provider": {
       "@type": "LocalBusiness",
       "name": "Lahore Blooms"
@@ -445,7 +413,7 @@ const serviceSchemas = [
     "offers": {
       "@type": "Offer",
       "priceCurrency": "PKR",
-      "priceRange": "Rs 6,000+"
+      "priceRange": "Rs 3,000+"
     }
   }
 ];
@@ -454,32 +422,32 @@ const serviceSchemas = [
 const howToSchema = {
   "@context": "https://schema.org",
   "@type": "HowTo",
-  "name": "How Our Wedding Room Decoration Service in Lahore Works",
-  "description": "Simple, professional process from booking to your perfect wedding night room",
+  "name": "How Our Wedding Car Decoration Service in Lahore Works",
+  "description": "Simple, professional process from booking to your perfect wedding car setup",
   "step": [
     {
       "@type": "HowToStep",
       "position": 1,
-      "name": "Share your date & location",
-      "text": "Tell us your area in Lahore (DHA, Bahria Town, Model Town, Johar Town, Faisal Town, Wapda Town, Gulberg, Cantt, etc.) and choose a package."
+      "name": "Share your date, area & car model",
+      "text": "Tell us your wedding date, time, area in Lahore (DHA, Bahria Town, Model Town, Johar Town, Faisal Town, Wapda Town, Cantt, etc.) and what car you're using – Alto, Civic, Corolla, Sportage, Fortuner, BMW, Audi or any other."
     },
     {
       "@type": "HowToStep",
       "position": 2,
-      "name": "Pick theme & colours",
-      "text": "Red & gold, pastel, romantic first-night, simple Pakistani wedding room decoration, or custom."
+      "name": "Pick theme, colours & budget",
+      "text": "Choose from simple ribbon car decoration, fresh flower bridal car designs or full barat car packages. Share if you prefer red & gold, pastel, traditional or black wedding car decoration – we'll guide you to the best option in your budget."
     },
     {
       "@type": "HowToStep",
       "position": 3,
-      "name": "We decorate your room",
-      "text": "Our team arrives on time, completes full room décor for wedding night in 1–2 hours, and leaves before the couple arrives."
+      "name": "We decorate your wedding car",
+      "text": "Our team arrives on time at your home, hall or rental office, completes full car decoration in 30–60 minutes, and leaves before the barat moves. We use tape and methods that protect the paint and are easy to remove after the event."
     },
     {
       "@type": "HowToStep",
       "position": 4,
-      "name": "Enjoy & share photos",
-      "text": "You get a photo-ready wedding night room. We can also keep petals and candles easy to remove for comfort."
+      "name": "Arrive in style & enjoy photos",
+      "text": "You get a photo-ready wedding car with clean finish from every angle. Take your time for pictures, reels and family photos before you drive away – we'll share simple instructions to remove ribbons and flowers later."
     }
   ]
 };
@@ -488,8 +456,8 @@ const howToSchema = {
 const itemListSchema = {
   "@context": "https://schema.org",
   "@type": "ItemList",
-  "name": "Wedding Room Decoration Designs – Choose Your Setup",
-  "description": "Every design below is a ready-to-book wedding room decoration product. Click View Details to see more photos and full description, or hit Order Now to book the same look for your date in Lahore.",
+  "name": "Wedding Car Decoration Designs – Choose Your Style",
+  "description": "Every setup below is a ready-to-book wedding car decoration design. Click View Details to see more photos and full description, or hit Order Now to book the same look for your date in Lahore.",
   "numberOfItems": products.length,
   "itemListElement": products.map((product, index) => ({
     "@type": "ListItem",
@@ -528,7 +496,7 @@ const reviewSchemas = [
       "ratingValue": "5",
       "bestRating": "5"
     },
-    "reviewBody": "I booked from Dubai for my sister's bridal room decoration in Lahore. Everything was exactly like the pictures and on time.",
+    "reviewBody": "I booked from Dubai for my sister's bridal car decoration in Lahore. Everything was exactly like the pictures and on time.",
     "datePublished": "2024-01-15"
   },
   {
@@ -547,7 +515,7 @@ const reviewSchemas = [
       "ratingValue": "5",
       "bestRating": "5"
     },
-    "reviewBody": "We chose the romantic first night room decoration package. The bed, lights and petals were perfect. Highly recommended.",
+    "reviewBody": "We chose the luxury bridal car decoration package. The bonnet bouquet, side flowers and ribbons were perfect. Highly recommended.",
     "datePublished": "2024-02-20"
   },
   {
@@ -566,7 +534,7 @@ const reviewSchemas = [
       "ratingValue": "5",
       "bestRating": "5"
     },
-    "reviewBody": "Booked simple wedding room decoration at home as we were on a budget. Still looked premium and fresh.",
+    "reviewBody": "Booked simple wedding car decoration with ribbons as we were on a budget. Still looked premium and elegant.",
     "datePublished": "2024-03-10"
   }
 ];
@@ -577,22 +545,22 @@ const reviewSchemas = [
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Wedding room decoration in Lahore with fresh flowers, romantic first night setups and bridal room décor at home. Low-budget and luxury packages, same-day service. Book on WhatsApp.">
+  <meta name="description" content="Wedding car decoration in Lahore with fresh flowers, ribbons, bows and full bridal car décor. Simple ribbon-only to luxury wedding car flower decoration for dulha, dulhan, barat and family cars. Same-day service. Book on WhatsApp.">
   <link rel="canonical" href={siteUrl}>
   
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content={siteUrl}>
-  <meta property="og:title" content="Wedding Room Decoration in Lahore | Bridal & First Night Décor">
-  <meta property="og:description" content="Wedding room decoration in Lahore with fresh flowers, romantic first night setups and bridal room décor at home. Low-budget and luxury packages, same-day service. Book on WhatsApp.">
-  <meta property="og:image" content={`${siteUrl}/images/hero-bg .webp`}>
+  <meta property="og:title" content="Wedding Car Decoration in Lahore | Bridal Car & Barat Décor">
+  <meta property="og:description" content="Wedding car decoration in Lahore with fresh flowers, ribbons, bows and full bridal car décor. Simple ribbon-only to luxury wedding car flower decoration for dulha, dulhan, barat and family cars. Same-day service. Book on WhatsApp.">
+  <meta property="og:image" content={`${siteUrl}/images/hero-bg.webp`}>
   
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image">
   <meta property="twitter:url" content={siteUrl}>
-  <meta property="twitter:title" content="Wedding Room Decoration in Lahore | Bridal & First Night Décor">
-  <meta property="twitter:description" content="Wedding room decoration in Lahore with fresh flowers, romantic first night setups and bridal room décor at home. Low-budget and luxury packages, same-day service. Book on WhatsApp.">
-  <meta property="twitter:image" content={`${siteUrl}/images/hero-bg .webp`}>
+  <meta property="twitter:title" content="Wedding Car Decoration in Lahore | Bridal Car & Barat Décor">
+  <meta property="twitter:description" content="Wedding car decoration in Lahore with fresh flowers, ribbons, bows and full bridal car décor. Simple ribbon-only to luxury wedding car flower decoration for dulha, dulhan, barat and family cars. Same-day service. Book on WhatsApp.">
+  <meta property="twitter:image" content={`${siteUrl}/images/hero-bg.webp`}>
   
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -616,9 +584,9 @@ const reviewSchemas = [
   <link rel="dns-prefetch" href="https://fonts.gstatic.com">
   
   <!-- Preload critical hero image -->
-  <link rel="preload" as="image" href="/images/hero-bg .webp" fetchpriority="high">
+  <link rel="preload" as="image" href="/images/hero-bg.webp" fetchpriority="high">
   
-  <title>Wedding Room Decoration in Lahore | Bridal & First Night Décor</title>
+  <title>Wedding Car Decoration in Lahore | Bridal Car & Barat Décor</title>
   
   <!-- JSON-LD Schemas -->
   <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
@@ -672,7 +640,7 @@ const reviewSchemas = [
         <h1 class="text-2xl font-bold bg-gradient-to-r from-pink-600 to-rose-600 bg-clip-text text-transparent">
           Lahore Blooms
         </h1>
-        <span class="text-xs text-gray-500 font-medium">Wedding Room Decoration in Lahore</span>
+        <span class="text-xs text-gray-500 font-medium">Wedding Car Decoration in Lahore</span>
       </div>
       <nav class="hidden lg:flex items-center gap-6">
         <a href="#packages" class="text-gray-700 hover:text-pink-600 transition-colors font-medium text-sm">Designs</a>
@@ -719,47 +687,47 @@ const reviewSchemas = [
   </div>
 
   <!-- Hero Section -->
-  <section class="relative pt-16 md:pt-24 pb-20 md:pb-32 px-4 md:px-8 lg:px-12 bg-cover bg-center bg-no-repeat" style="background-image: url('/images/hero-bg .webp');">
+  <section class="relative pt-16 md:pt-24 pb-20 md:pb-32 px-4 md:px-8 lg:px-12 bg-cover bg-center bg-no-repeat" style="background-image: url('/images/hero-bg.webp');">
     <!-- Overlay - Left half only, fading to center -->
     <div class="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-transparent pointer-events-none"></div>
     
     <div class="relative z-10 max-w-4xl">
       <div class="text-left max-w-2xl">
         <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight">
-          Wedding Room Decoration in Lahore
+          Wedding Car Decoration in Lahore
         </h1>
         <p class="text-lg md:text-xl text-white/90 mb-6 leading-relaxed">
-          Romantic wedding room decoration at home in Lahore with fresh flowers, fairy lights and full bridal bedroom décor. Choose from simple, low-budget or luxury wedding night room packages.
+          Fresh flower wedding car décor for dulha, dulhan and family cars. From simple ribbon looks to full luxury bridal car decoration – we design and install everything for you on the wedding day.
         </p>
         
         <!-- Bullet Strip -->
         <div class="grid sm:grid-cols-2 gap-3 mb-8">
           <div class="flex items-center gap-2 text-white">
             <span class="text-green-400 text-lg">✅</span>
-            <span class="text-sm md:text-base">At home in Lahore – DHA, Bahria Town & more</span>
-          </div>
-          <div class="flex items-center gap-2 text-white">
-            <span class="text-pink-300 text-lg">🌹</span>
-            <span class="text-sm md:text-base">Fresh flower decoration</span>
+            <span class="text-sm md:text-base">Wedding car decoration across Lahore – DHA, Bahria Town, Johar Town, Model Town & more</span>
           </div>
           <div class="flex items-center gap-2 text-white">
             <span class="text-green-400 text-lg">💸</span>
-            <span class="text-sm md:text-base">Low-budget & premium packages</span>
+            <span class="text-sm md:text-base">Budget & premium packages for all cars – Alto to Audi, Civic to Fortuner</span>
+          </div>
+          <div class="flex items-center gap-2 text-white">
+            <span class="text-pink-300 text-lg">🌹</span>
+            <span class="text-sm md:text-base">Fresh roses, motia, tuberose & seasonal blooms</span>
           </div>
           <div class="flex items-center gap-2 text-white">
             <span class="text-blue-300 text-lg">⏱️</span>
-            <span class="text-sm md:text-base">Same-day booking available</span>
+            <span class="text-sm md:text-base">Same-day and last-minute wedding car decoration available</span>
           </div>
         </div>
 
         <!-- CTAs -->
         <div class="flex flex-col sm:flex-row gap-4">
           <a href="#packages" class="bg-pink-600 hover:bg-pink-700 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all flex items-center justify-center gap-2 shadow-xl hover:shadow-2xl transform hover:-translate-y-0.5">
-            See Packages & Prices
+            See Car Decoration Packages & Prices
           </a>
           <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="bg-white/90 hover:bg-white text-gray-900 px-8 py-4 rounded-full font-semibold text-lg transition-all flex items-center justify-center gap-2 shadow-xl hover:shadow-2xl">
             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-            WhatsApp Us for Today's Booking
+            WhatsApp Us for Today's Wedding Car Booking
           </a>
         </div>
       </div>
@@ -779,7 +747,7 @@ const reviewSchemas = [
             </div>
             <div>
               <div class="font-semibold text-gray-900 mb-1 text-base">Service</div>
-              <p class="text-sm text-gray-700">Wedding room decoration, bridal room decoration, masehri & honeymoon bed design in Lahore</p>
+              <p class="text-sm text-gray-700">Wedding car decoration, dulha & dulhan car décor, barat car decoration and groom car flowers in Lahore</p>
             </div>
           </div>
 
@@ -790,7 +758,7 @@ const reviewSchemas = [
             </div>
             <div>
               <div class="font-semibold text-gray-900 mb-1 text-base">Where</div>
-              <p class="text-sm text-gray-700">At home, hotel rooms, guest houses across Lahore</p>
+              <p class="text-sm text-gray-700">At home, wedding halls, hotels, photo studios, and car rental locations anywhere in Lahore</p>
             </div>
           </div>
 
@@ -801,7 +769,7 @@ const reviewSchemas = [
             </div>
             <div>
               <div class="font-semibold text-gray-900 mb-1 text-base">Includes</div>
-              <p class="text-sm text-gray-700">Bed & room flower decoration, petals, fairy lights, candles (on request), entrance & door décor</p>
+              <p class="text-sm text-gray-700">Car bonnet bouquet, side flower strings, rear window flowers, wedding car ribbon, ready-made wedding car bows, number plate décor & interior petals (as per package)</p>
             </div>
           </div>
 
@@ -812,7 +780,8 @@ const reviewSchemas = [
             </div>
             <div>
               <div class="font-semibold text-gray-900 mb-1 text-base">Starting From</div>
-              <p class="text-sm text-gray-700"><span class="font-bold text-pink-600">Rs 6,000</span> for simple wedding room decoration</p>
+              <p class="text-sm text-gray-700"><span class="font-bold text-pink-600">From Rs 1500</span> for simple car ribbon decoration</p>
+              <p class="text-sm text-gray-700"><span class="font-bold text-pink-600">From Rs 3,000</span> for fresh flower wedding car decoration</p>
             </div>
           </div>
 
@@ -823,7 +792,7 @@ const reviewSchemas = [
             </div>
             <div>
               <div class="font-semibold text-gray-900 mb-1 text-base">Best For</div>
-              <p class="text-sm text-gray-700">First night (suhagrat), bridal room, anniversary & honeymoon room decoration</p>
+              <p class="text-sm text-gray-700">Dulha car decoration, dulhan arrival car, barat car, bride & groom entry, engagement, nikkah and walima events</p>
             </div>
           </div>
 
@@ -834,7 +803,7 @@ const reviewSchemas = [
             </div>
             <div>
               <div class="font-semibold text-gray-900 mb-1 text-base">Booking</div>
-              <p class="text-sm text-gray-700">WhatsApp, call or quick order form pop-up</p>
+              <p class="text-sm text-gray-700">WhatsApp, call or quick order form pop-up – share car type (Alto, Civic, BMW, Audi, Fortuner, Sportage etc.), date, area & budget</p>
             </div>
           </div>
         </div>
@@ -847,10 +816,13 @@ const reviewSchemas = [
   <section id="packages" class="py-16 md:py-24 px-4 bg-gray-50">
     <div class="container mx-auto max-w-6xl">
       <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 text-gray-900">
-        Wedding Room Decoration Designs – Choose Your Setup
+        Wedding Car Decoration Designs – Choose Your Style
       </h2>
       <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
-        Every design below is a ready-to-book wedding room decoration product. Click View Details to see more photos and full description, or hit Order Now to book the same look for your date in Lahore.
+        Every setup below is a ready-to-book wedding car decoration design. Click View Details to see more photos and full description, or hit Order Now to book the same look for your date in Lahore.
+      </p>
+      <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
+        We decorate all popular models including Alto, Civic, City, Corolla, Sportage, Fortuner, Baleno, Brezza, Bolero, BMW, Mercedes, Audi and more.
       </p>
       <div id="products-grid" class="grid md:grid-cols-3 lg:grid-cols-4 gap-6 mb-8">
         {products.slice(0, initialProductsToShow).map((product) => (
@@ -981,13 +953,10 @@ const reviewSchemas = [
   <section id="services" class="py-16 md:py-24 px-4 bg-white">
     <div class="container mx-auto max-w-6xl">
       <h2 class="text-3xl md:text-4xl font-bold text-center mb-6 text-gray-900">
-        Wedding Room Decoration Services in Lahore
+        Wedding Car Decoration Services in Lahore
       </h2>
       <p class="text-center text-gray-600 mb-12 max-w-3xl mx-auto text-lg leading-relaxed">
-        We don't just sell flowers – we provide a full wedding room decoration service in Lahore.
-      </p>
-      <p class="text-center text-gray-600 mb-12 max-w-3xl mx-auto text-lg leading-relaxed">
-        From bridal & first-night bedroom décor to anniversary surprises and honeymoon stays, our team designs and installs everything for you at home or in hotels across Lahore.
+        We don't just tie a ribbon on the bonnet – we provide a full wedding car decoration service in Lahore. From simple bridal car ribbon designs to luxury flower wedding car setups for barat and family cars, our team designs, delivers and installs everything on the wedding day.
       </p>
 
       <!-- Row 1: Bridal + Wedding Night + Masehri - Image Left, Content Right -->
@@ -996,8 +965,8 @@ const reviewSchemas = [
           <!-- Image Left -->
           <div class="w-full md:w-1/2">
             <img 
-              src="/images/bridal-wedding-night-masehri.webp" 
-              alt="Bridal, Wedding Night & Masehri Room Decoration"
+              src="/images/dulha-dulhan-car-decoration.webp" 
+              alt="Dulha & Dulhan Car Decoration"
               class="w-full h-auto rounded-xl shadow-lg object-cover"
               loading="lazy"
             />
@@ -1008,16 +977,16 @@ const reviewSchemas = [
               <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
             </div>
             <h3 class="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
-              Bridal, Wedding Night & Masehri Room Decoration
+              Dulha & Dulhan Car Decoration
             </h3>
             <p class="text-gray-700 mb-4 font-medium">
-              Bridal Room, First-Night & Saij Design
+              Bridal Car, First-Entry & Couple's Exit
             </p>
             <p class="text-gray-600 leading-relaxed mb-3">
-              Complete wedding room decoration in Lahore for the bride and groom – one service that covers bridal room décor, wedding night / suhagrat setup and traditional masehri / saij design.
+              Complete bridal car decoration in Lahore for dulha and dulhan – one service that covers car bonnet bouquet, side flower strings, rear window décor and matching wedding car ribbon.
             </p>
             <p class="text-gray-600 leading-relaxed">
-              Fresh flowers, petals, fairy lights and fabric styling for a bedroom that looks beautiful in photos and feels romantic when the couple enters.
+              We use fresh roses, motia, gajra-style strings and long wedding car flowers so your dulhan car looks beautiful in photos and feels special when the couple arrives or leaves.
             </p>
           </div>
         </div>
@@ -1029,8 +998,8 @@ const reviewSchemas = [
           <!-- Image Right -->
           <div class="w-full md:w-1/2">
             <img 
-              src="/images/anniversary-room-decoration.webp" 
-              alt="Anniversary Room Decoration"
+              src="/images/barat-family-car-decoration.webp" 
+              alt="Barat & Family Car Decoration"
               class="w-full h-auto rounded-xl shadow-lg object-cover"
               loading="lazy"
             />
@@ -1041,16 +1010,16 @@ const reviewSchemas = [
               <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
             </div>
             <h3 class="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
-              Anniversary Room Decoration
+              Barat & Family Car Decoration
             </h3>
             <p class="text-gray-700 mb-4 font-medium">
-              Romantic Anniversary Bedroom Décor
+              Barati, Parents & Close Family Cars
             </p>
             <p class="text-gray-600 leading-relaxed mb-3">
-              Special anniversary room decoration with numbers, message banner and fresh flowers.
+              Special barat car decoration packages with a mix of simple car ribbon decoration and fresh flower accents.
             </p>
             <p class="text-gray-600 leading-relaxed">
-              Perfect for couples celebrating 1st, 5th, 10th or any year – at home or hotel in Lahore – with a romantic yet comfortable bedroom setup.
+              Perfect for families who want all cars in the barat line to look coordinated – from \"simple car decoration for wedding\" to more detailed designs for parents and siblings.
             </p>
           </div>
         </div>
@@ -1062,8 +1031,8 @@ const reviewSchemas = [
           <!-- Image Left -->
           <div class="w-full md:w-1/2">
             <img 
-              src="/images/honeymoon-bedroom-decoration.webp" 
-              alt="Honeymoon Bedroom Decoration"
+              src="/images/luxury-wedding-car-4x4-decoration.webp" 
+              alt="Luxury Wedding Car & 4x4 Decoration"
               class="w-full h-auto rounded-xl shadow-lg object-cover"
               loading="lazy"
             />
@@ -1074,23 +1043,23 @@ const reviewSchemas = [
               <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2v13m-2 0H6a2 2 0 01-2-2V9a2 2 0 012-2h4m8 0h4a2 2 0 012 2v10a2 2 0 01-2 2h-4m-8 0V9a2 2 0 012-2h4m0 0V6a2 2 0 112 2v1"/></svg>
             </div>
             <h3 class="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
-              Honeymoon Bedroom Decoration
+              Luxury Wedding Car & 4x4 Decoration
             </h3>
             <p class="text-gray-700 mb-4 font-medium">
-              Honeymoon Bed Design for Newly-Weds
+              Audi, BMW, Mercedes, Fortuner, Sportage & More
             </p>
             <p class="text-gray-600 leading-relaxed mb-3">
-              Premium honeymoon bedroom decoration for newly-weds and couples visiting Lahore.
+              Premium wedding car decoration for luxury cars and 4x4s. We design for Audi, BMW, Mercedes, Fortuner, Sportage, Kia, Prado and other high-end cars with care so the paint and body are protected.
             </p>
             <p class="text-gray-600 leading-relaxed">
-              Includes romantic honeymoon bed design with roses, petals and soft lighting so your stay starts with a beautiful surprise.
+              Options for full flower décor, minimal bonnet bouquet, or elegant wedding car ribbons and bows that match your theme and photography style.
             </p>
           </div>
         </div>
       </div>
 
       <p class="text-center text-gray-700 font-medium">
-        Next step: Choose your favourite wedding room decoration design from the products above and book it instantly.
+        Next step: Choose your favourite wedding car decoration design from the products above and book it instantly.
       </p>
     </div>
   </section>
@@ -1104,8 +1073,8 @@ const reviewSchemas = [
         <form id="order-form" onsubmit="window.submitOrder(event)" class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
           <div class="sm:flex sm:items-start">
             <div class="mt-3 text-center sm:mt-0 sm:text-left w-full">
-              <h3 class="text-2xl font-bold text-gray-900 mb-4" id="modal-title">Order Wedding Room Decoration</h3>
-              <p id="modal-description" class="sr-only">Fill out the form below to order your wedding room decoration. All fields marked with * are required.</p>
+              <h3 class="text-2xl font-bold text-gray-900 mb-4" id="modal-title">Order Wedding Car Decoration</h3>
+              <p id="modal-description" class="sr-only">Fill out the form below to order your wedding car decoration. All fields marked with * are required.</p>
               <div class="mb-4">
                 <p class="text-lg font-semibold text-pink-600" id="modal-product-title"></p>
                 <p class="text-gray-600" id="modal-product-price"></p>
@@ -1195,7 +1164,7 @@ const reviewSchemas = [
       const data = Object.fromEntries(formData.entries());
       
       const whatsappNumber = '923227555459';
-      const message = '*Wedding Room Decoration Order*\n\n' +
+      const message = '*Wedding Car Decoration Order*\n\n' +
         '*Design:* ' + data.design + '\n' +
         '*Name:* ' + data.name + '\n' +
         '*Phone:* ' + data.phone + '\n' +
@@ -1245,14 +1214,14 @@ const reviewSchemas = [
     });
   </script>
 
-  <!-- Wedding Room Decoration Ideas & Themes Section -->
+  <!-- Wedding Car Decoration Ideas & Themes Section -->
   <section id="ideas" class="py-16 md:py-24 px-4 bg-white">
     <div class="container mx-auto max-w-6xl">
       <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 text-gray-900">
-        Wedding Room Decoration Ideas & Themes
+        Wedding Car Decoration Ideas & Themes
       </h2>
       <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
-        Every couple is different. Choose from our most popular wedding room decoration ideas or mix elements to create your own theme.
+        Every couple is different. Choose from our most popular wedding car decoration ideas in Lahore or mix elements to create your own theme.
       </p>
 
       <div class="grid md:grid-cols-2 gap-8 lg:gap-12">
@@ -1260,28 +1229,28 @@ const reviewSchemas = [
         <div class="bg-white rounded-xl overflow-hidden border border-gray-200 hover:shadow-xl transition-all transform hover:-translate-y-1">
           <div class="aspect-square overflow-hidden bg-gray-100">
             <img 
-              src="/images/simple-pakistani-wedding-room.webp" 
-              alt="Simple Pakistani Wedding Room Decoration"
+              src="/images/classic-ribbon-bonnet-bouquet.webp" 
+              alt="Classic Ribbon & Bonnet Bouquet Car Décor"
               class="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
               loading="lazy"
             />
           </div>
           <div class="p-6 md:p-8">
             <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-4">
-              Simple Pakistani Wedding Room Decoration
+              Classic Ribbon & Bonnet Bouquet Car Décor
             </h3>
             <ul class="space-y-3 text-base text-gray-600">
               <li class="flex items-start gap-2">
                 <span class="text-pink-600 mt-1">•</span>
-                <span>Clean, minimal bed decoration with petals</span>
+                <span>Cross or V-shape ribbons from bumper to windscreen, with a fresh flower bouquet in the centre of the bonnet</span>
               </li>
               <li class="flex items-start gap-2">
                 <span class="text-pink-600 mt-1">•</span>
-                <span>Few flower vases and soft lighting</span>
+                <span>Small matching flower bunches on side mirrors and door handles for a neat finish</span>
               </li>
               <li class="flex items-start gap-2">
                 <span class="text-pink-600 mt-1">•</span>
-                <span>Perfect for simple wedding room decoration at home</span>
+                <span>Best for simple dulha / bridal car decoration on a budget (sedan or small car)</span>
               </li>
             </ul>
           </div>
@@ -1291,24 +1260,28 @@ const reviewSchemas = [
         <div class="bg-white rounded-xl overflow-hidden border border-gray-200 hover:shadow-xl transition-all transform hover:-translate-y-1">
           <div class="aspect-square overflow-hidden bg-gray-100">
             <img 
-              src="/images/romantic-red-gold-theme.webp" 
-              alt="Romantic Red & Gold Theme"
+              src="/images/full-front-flower-garland-bridal-car.webp" 
+              alt="Full Front Flower Garland Bridal Car"
               class="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
               loading="lazy"
             />
           </div>
           <div class="p-6 md:p-8">
             <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-4">
-              Romantic Red & Gold Theme
+              Full Front Flower Garland Bridal Car
             </h3>
             <ul class="space-y-3 text-base text-gray-600">
               <li class="flex items-start gap-2">
                 <span class="text-red-600 mt-1">•</span>
-                <span>Deep red roses, gold fairy lights, candles</span>
+                <span>Thick U-shaped garland covering the full front bonnet and running up to the windscreen</span>
               </li>
               <li class="flex items-start gap-2">
                 <span class="text-red-600 mt-1">•</span>
-                <span>Romantic wedding room decoration for first night</span>
+                <span>Extra bonnet bouquet or roof bouquet for photos when the car arrives at the house or hall</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-red-600 mt-1">•</span>
+                <span>Works well for main bridal car / barat car where front view matters most in pictures</span>
               </li>
             </ul>
           </div>
@@ -1318,24 +1291,28 @@ const reviewSchemas = [
         <div class="bg-white rounded-xl overflow-hidden border border-gray-200 hover:shadow-xl transition-all transform hover:-translate-y-1">
           <div class="aspect-square overflow-hidden bg-gray-100">
             <img 
-              src="/images/pastel-floral-theme.webp" 
-              alt="Pastel Floral Theme"
+              src="/images/grand-suv-wedding-car-decor.webp" 
+              alt="Grand SUV Wedding Car Décor"
               class="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
               loading="lazy"
             />
           </div>
           <div class="p-6 md:p-8">
             <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-4">
-              Pastel Floral Theme
+              Grand SUV Wedding Car Décor (Front + Sides)
             </h3>
             <ul class="space-y-3 text-base text-gray-600">
               <li class="flex items-start gap-2">
                 <span class="text-pink-600 mt-1">•</span>
-                <span>Soft pink, peach and white flowers</span>
+                <span>Long continuous garland starting from front bumper, running along one side and ending at the back – designed specially for SUVs and big cars</span>
               </li>
               <li class="flex items-start gap-2">
                 <span class="text-pink-600 mt-1">•</span>
-                <span>Works for bridal room decoration with flowers and photos</span>
+                <span>Corner flower clusters on roof rails, side mirrors and back glass for a luxury, 360° look</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-pink-600 mt-1">•</span>
+                <span>Ideal for Fortuner, Sportage, Tuscon, MG, Kia, etc. when you want a \"VIP entry\" feel</span>
               </li>
             </ul>
           </div>
@@ -1345,24 +1322,28 @@ const reviewSchemas = [
         <div class="bg-white rounded-xl overflow-hidden border border-gray-200 hover:shadow-xl transition-all transform hover:-translate-y-1">
           <div class="aspect-square overflow-hidden bg-gray-100">
             <img 
-              src="/images/anniversary-honeymoon-theme.webp" 
-              alt="Anniversary & Honeymoon Theme"
+              src="/images/heart-shape-surprise-drive-decoration.webp" 
+              alt="Heart-Shape & Surprise Drive Decoration"
               class="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
               loading="lazy"
             />
           </div>
           <div class="p-6 md:p-8">
             <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-4">
-              Anniversary & Honeymoon Theme
+              Heart-Shape & Surprise Drive Decoration
             </h3>
             <ul class="space-y-3 text-base text-gray-600">
               <li class="flex items-start gap-2">
                 <span class="text-purple-600 mt-1">•</span>
-                <span>Number balloons (1st, 5th, 10th)</span>
+                <span>Heart-shaped flower arrangement on the bonnet with soft ribbon drapes to the roof or mirrors</span>
               </li>
               <li class="flex items-start gap-2">
                 <span class="text-purple-600 mt-1">•</span>
-                <span>Anniversary room decoration with message banner and flower heart</span>
+                <span>Light rear decoration on back glass / number plate for couple photos from behind the car</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-purple-600 mt-1">•</span>
+                <span>Perfect for anniversaries, honeymoon pickup from airport or surprise drives inside Lahore</span>
               </li>
             </ul>
           </div>
@@ -1375,29 +1356,29 @@ const reviewSchemas = [
   <section class="py-16 md:py-24 px-4 bg-gradient-to-br from-purple-50 via-pink-50 to-rose-50">
     <div class="container mx-auto max-w-6xl">
       <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 text-gray-900">
-        Masehri, Saij & Traditional Bridal Room Decoration
+        Dulha, Barat & Traditional Shadi Car Decoration
       </h2>
       <p class="text-center text-gray-700 mb-8 max-w-3xl mx-auto leading-relaxed">
-        In Lahore and across Pakistan, masehri design, saij design and traditional bridal bedroom décor are a big part of the wedding. Our team specializes in wedding masehri decoration with fabric, fairy lights and fresh flowers – not just balloons.
+        In Lahore and across Pakistan, the dulha car and barat cars are a big part of the wedding entry. Our team specializes in traditional shadi car decoration with fabric, fresh flowers and classic Pakistani style – not just balloons.
       </p>
 
       <div class="bg-white rounded-xl p-6 md:p-8 shadow-lg border border-purple-200 max-w-3xl mx-auto mb-8">
         <ul class="space-y-3">
           <li class="flex items-start gap-3">
             <svg class="w-6 h-6 text-purple-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-            <span class="text-gray-700">Bed masehri design, canopy and backdrop</span>
+            <span class="text-gray-700">Full dulha car decoration with bonnet bouquet, roof flowers and side garlands</span>
           </li>
           <li class="flex items-start gap-3">
             <svg class="w-6 h-6 text-purple-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-            <span class="text-gray-700">Floor seating with cushions and petals</span>
+            <span class="text-gray-700">Matching barat car decoration for friends, cousins and family vehicles</span>
           </li>
           <li class="flex items-start gap-3">
             <svg class="w-6 h-6 text-purple-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-            <span class="text-gray-700">Matching door & sofa flower decoration</span>
+            <span class="text-gray-700">Options for motia, genda and rose flower strings for a traditional look</span>
           </li>
           <li class="flex items-start gap-3">
             <svg class="w-6 h-6 text-purple-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-            <span class="text-gray-700">Options for simple artificial masehri design if budget is tight</span>
+            <span class="text-gray-700">Simple artificial flower wedding car decoration if budget is tight or travel is long</span>
           </li>
         </ul>
       </div>
@@ -1405,7 +1386,7 @@ const reviewSchemas = [
       <div class="text-center">
         <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all shadow-xl hover:shadow-2xl transform hover:-translate-y-0.5">
           <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-          See Traditional Designs on WhatsApp
+          See Traditional Dulha & Barat Car Designs on WhatsApp
         </a>
       </div>
     </div>
@@ -1422,10 +1403,10 @@ const reviewSchemas = [
     <div class="container mx-auto max-w-7xl relative z-10">
       <div class="text-center mb-16">
         <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-gray-900">
-          How Our Wedding Room Decoration Service in Lahore Works
+          How Our Wedding Car Decoration Service in Lahore Works
         </h2>
         <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-          Simple, professional process from booking to your perfect wedding night room
+          Simple, professional process from booking to your perfect wedding car setup.
         </p>
       </div>
 
@@ -1449,8 +1430,8 @@ const reviewSchemas = [
                 <svg class="w-10 h-10 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
               </div>
               
-              <h3 class="text-2xl font-bold mb-4 text-gray-900 text-center">Share your date & location</h3>
-              <p class="text-gray-600 leading-relaxed text-center">Tell us your area in Lahore (DHA, Bahria Town, Model Town, Johar Town, Faisal Town, Wapda Town, Gulberg, Cantt, etc.) and choose a package.</p>
+              <h3 class="text-2xl font-bold mb-4 text-gray-900 text-center">Share your date, area & car model</h3>
+              <p class="text-gray-600 leading-relaxed text-center">Tell us your wedding date, time, area in Lahore (DHA, Bahria Town, Model Town, Johar Town, Faisal Town, Wapda Town, Cantt, etc.) and what car you're using – Alto, Civic, Corolla, Sportage, Fortuner, BMW, Audi or any other.</p>
             </div>
           </div>
           
@@ -1469,8 +1450,8 @@ const reviewSchemas = [
                 <svg class="w-10 h-10 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/></svg>
               </div>
               
-              <h3 class="text-2xl font-bold mb-4 text-gray-900 text-center">Pick theme & colours</h3>
-              <p class="text-gray-600 leading-relaxed text-center">Red & gold, pastel, romantic first-night, simple Pakistani wedding room decoration, or custom.</p>
+              <h3 class="text-2xl font-bold mb-4 text-gray-900 text-center">Pick theme, colours & budget</h3>
+              <p class="text-gray-600 leading-relaxed text-center">Choose from simple ribbon car decoration, fresh flower bridal car designs or full barat car packages. Share if you prefer red & gold, pastel, traditional or black wedding car decoration – we'll guide you to the best option in your budget.</p>
             </div>
           </div>
           
@@ -1489,8 +1470,8 @@ const reviewSchemas = [
                 <svg class="w-10 h-10 text-rose-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
               </div>
               
-              <h3 class="text-2xl font-bold mb-4 text-gray-900 text-center">We decorate your room</h3>
-              <p class="text-gray-600 leading-relaxed text-center">Our team arrives on time, completes full room décor for wedding night in 1–2 hours, and leaves before the couple arrives.</p>
+              <h3 class="text-2xl font-bold mb-4 text-gray-900 text-center">We decorate your wedding car</h3>
+              <p class="text-gray-600 leading-relaxed text-center">Our team arrives on time at your home, hall or rental office, completes full car decoration in 30–60 minutes, and leaves before the barat moves. We use tape and methods that protect the paint and are easy to remove after the event.</p>
             </div>
           </div>
           
@@ -1509,8 +1490,8 @@ const reviewSchemas = [
                 <svg class="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
               </div>
               
-              <h3 class="text-2xl font-bold mb-4 text-gray-900 text-center">Enjoy & share photos</h3>
-              <p class="text-gray-600 leading-relaxed text-center">You get a photo-ready wedding night room. We can also keep petals and candles easy to remove for comfort.</p>
+              <h3 class="text-2xl font-bold mb-4 text-gray-900 text-center">Arrive in style & enjoy photos</h3>
+              <p class="text-gray-600 leading-relaxed text-center">You get a photo-ready wedding car with clean finish from every angle. Take your time for pictures, reels and family photos before you drive away – we'll share simple instructions to remove ribbons and flowers later.</p>
             </div>
           </div>
         </div>
@@ -1529,7 +1510,7 @@ const reviewSchemas = [
     <div class="container mx-auto max-w-7xl relative z-10">
       <div class="text-center mb-16">
         <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-gray-900">
-          Why Couples Choose Lahore Blooms for Wedding Room Decoration
+          Why Couples Choose Lahore Blooms for Wedding Car Decoration
         </h2>
         <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
           Trusted by hundreds of couples across Lahore for their most special moments
@@ -1546,7 +1527,7 @@ const reviewSchemas = [
             </div>
             <h3 class="text-xl font-bold mb-3 text-gray-900">11+ Years of Fresh Flower Experience</h3>
             <p class="text-gray-600 leading-relaxed">
-              Family business in Lahore now bringing that expertise into wedding room & bridal décor
+              Family business in Lahore now bringing that experience from bouquets to full wedding car flowers, bridal car bouquets and barat car garlands.
             </p>
           </div>
         </div>
@@ -1558,9 +1539,9 @@ const reviewSchemas = [
             <div class="w-16 h-16 bg-gradient-to-br from-purple-100 to-pink-100 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
               <span class="text-3xl">💒</span>
             </div>
-            <h3 class="text-xl font-bold mb-3 text-gray-900">Specialized in Room Decoration</h3>
+            <h3 class="text-xl font-bold mb-3 text-gray-900">Specialized in Wedding Car Decoration</h3>
             <p class="text-gray-600 leading-relaxed">
-              We decorate bedrooms, masehri/saij, hotel rooms and home setups for first night, bridal entry and anniversaries – not just bouquets
+              We focus on car arrangements for weddings – dulha, dulhan, barat and family cars – not just general balloon décor.
             </p>
           </div>
         </div>
@@ -1572,9 +1553,9 @@ const reviewSchemas = [
             <div class="w-16 h-16 bg-gradient-to-br from-blue-100 to-purple-100 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
               <span class="text-3xl">📸</span>
             </div>
-            <h3 class="text-xl font-bold mb-3 text-gray-900">Real Work, Real Lahore Couples</h3>
+            <h3 class="text-xl font-bold mb-3 text-gray-900">Real Work, Real Lahore Cars</h3>
             <p class="text-gray-600 leading-relaxed">
-              All photos on this page come from our actual clients in Lahore, not stock images
+              Photos on this page are from our actual work on real Lahore cars – Alto, Civic, Corolla, Fortuner, Sportage, BMW, Audi & more – not only AI images.
             </p>
           </div>
         </div>
@@ -1588,7 +1569,7 @@ const reviewSchemas = [
             </div>
             <h3 class="text-xl font-bold mb-3 text-gray-900">Reliable Timing on Wedding Days</h3>
             <p class="text-gray-600 leading-relaxed">
-              We coordinate with your family, hotel or home so the room is ready before the bride & groom arrive
+              We coordinate with your planner, photographer and family so your car is decorated on time before the barat leaves or bride arrives.
             </p>
           </div>
         </div>
@@ -1602,7 +1583,7 @@ const reviewSchemas = [
             </div>
             <h3 class="text-xl font-bold mb-3 text-gray-900">Clean & Safe Setup</h3>
             <p class="text-gray-600 leading-relaxed">
-              No wax on bedsheets, careful with tape and walls, and we tidy up petals/packing so the room stays comfortable
+              No messy glue on paint, we use proper tape and padding. We avoid blocking mirrors, number plates and lights so the car stays safe for driving.
             </p>
           </div>
         </div>
@@ -1616,7 +1597,7 @@ const reviewSchemas = [
             </div>
             <h3 class="text-xl font-bold mb-3 text-gray-900">WhatsApp-First Support</h3>
             <p class="text-gray-600 leading-relaxed">
-              Send us your own wedding room decoration ideas, Pinterest screenshots or AI images, and we'll match them to your budget and location in Lahore
+              Send us screenshots from Pinterest, Instagram or your favourite \"decorative car for wedding\" ideas. We'll suggest designs, prices and car-specific changes on WhatsApp.
             </p>
           </div>
         </div>
@@ -1638,10 +1619,7 @@ const reviewSchemas = [
           Areas We Cover in Lahore
         </h2>
         <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-4">
-          We provide this bedroom décor service throughout Lahore
-        </p>
-        <p class="text-base text-gray-500 max-w-2xl mx-auto">
-          Here are some of the areas we frequently serve:
+          We provide wedding car decoration across Lahore. Here are some of the areas we frequently serve – if your area isn't listed, just ask on WhatsApp.
         </p>
       </div>
       
@@ -1683,7 +1661,7 @@ const reviewSchemas = [
     <div class="container mx-auto max-w-7xl relative z-10">
       <div class="text-center mb-16">
         <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-gray-900">
-          Real Reviews from Wedding Room Decoration Clients in Lahore
+          Real Reviews from Wedding Car Decoration Clients in Lahore
         </h2>
         <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
           Trusted by couples across Lahore for their most special moments
@@ -1698,7 +1676,7 @@ const reviewSchemas = [
               <svg class="w-6 h-6 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
             ))}
           </div>
-          <p class="text-gray-700 mb-6 italic leading-relaxed text-lg">"I booked from Dubai for my sister's bridal room decoration in Lahore. Everything was exactly like the pictures and on time."</p>
+          <p class="text-gray-700 mb-6 italic leading-relaxed text-lg">"I booked from Dubai for my sister's bridal car decoration in Lahore. Everything was exactly like the pictures and on time."</p>
           <div class="flex items-center gap-3 pt-4 border-t border-gray-100">
             <div class="w-12 h-12 bg-gradient-to-br from-pink-100 to-rose-100 rounded-full flex items-center justify-center">
               <span class="text-xl font-bold text-pink-600">A</span>
@@ -1717,7 +1695,7 @@ const reviewSchemas = [
               <svg class="w-6 h-6 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
             ))}
           </div>
-          <p class="text-gray-700 mb-6 italic leading-relaxed text-lg">"We chose the romantic first night room decoration package. The bed, lights and petals were perfect. Highly recommended."</p>
+          <p class="text-gray-700 mb-6 italic leading-relaxed text-lg">"We chose the luxury bridal car decoration package. The bonnet bouquet, side flowers and ribbons were perfect. Highly recommended."</p>
           <div class="flex items-center gap-3 pt-4 border-t border-gray-100">
             <div class="w-12 h-12 bg-gradient-to-br from-purple-100 to-pink-100 rounded-full flex items-center justify-center">
               <span class="text-xl font-bold text-purple-600">H</span>
@@ -1736,7 +1714,7 @@ const reviewSchemas = [
               <svg class="w-6 h-6 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
             ))}
           </div>
-          <p class="text-gray-700 mb-6 italic leading-relaxed text-lg">"Booked simple wedding room decoration at home as we were on a budget. Still looked premium and fresh."</p>
+          <p class="text-gray-700 mb-6 italic leading-relaxed text-lg">"Booked simple wedding car decoration with ribbons as we were on a budget. Still looked premium and elegant."</p>
           <div class="flex items-center gap-3 pt-4 border-t border-gray-100">
             <div class="w-12 h-12 bg-gradient-to-br from-rose-100 to-pink-100 rounded-full flex items-center justify-center">
               <span class="text-xl font-bold text-rose-600">S</span>
@@ -1765,7 +1743,7 @@ const reviewSchemas = [
           Frequently Asked Questions
         </h2>
         <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-          Everything you need to know about our wedding room decoration service
+          Frequently Asked Questions – Wedding Car Decoration in Lahore
         </p>
       </div>
       
@@ -1773,7 +1751,7 @@ const reviewSchemas = [
         <!-- FAQ Block 1 – Service FAQs -->
         <div>
           <h3 class="text-2xl md:text-3xl font-bold mb-8 text-gray-900">
-            Service FAQs – Lahore Blooms Room Décor
+            Service FAQs – Lahore Blooms Car Décor
           </h3>
           <div class="space-y-6">
             {faqs.slice(0, Math.ceil(faqs.length / 2)).map(faq => (
@@ -1788,7 +1766,7 @@ const reviewSchemas = [
         <!-- FAQ Block 2 – Decoration Ideas & General Questions -->
         <div>
           <h3 class="text-2xl md:text-3xl font-bold mb-8 text-gray-900">
-            Decoration Ideas – Wedding Room, Bridal Room & First Night FAQs
+            Decoration Ideas – Wedding Car, Bridal Car & Barat FAQs
           </h3>
           <div class="space-y-6">
             {faqs.slice(Math.ceil(faqs.length / 2)).map(faq => (
@@ -1813,10 +1791,10 @@ const reviewSchemas = [
     
     <div class="container mx-auto max-w-5xl text-center relative z-10">
       <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-        Ready to Book Your Wedding Room Decoration in Lahore?
+        Ready to Book Your Wedding Car Decoration in Lahore?
       </h2>
       <p class="text-lg md:text-xl mb-12 opacity-95 max-w-3xl mx-auto leading-relaxed">
-        Whether you need a simple wedding room decoration with flowers or a full romantic first-night room setup, our team is ready to help. Share your date, area and budget – we'll reply on WhatsApp with ideas and prices.
+        Whether you need a simple wedding car ribbon decoration or a full fresh flower bridal car setup with bows, garlands and lights, our team is ready to help. Share your date, area, car model and budget – we'll reply on WhatsApp with ideas, photos and prices.
       </p>
       <div class="flex flex-col sm:flex-row gap-6 justify-center">
         <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="bg-white hover:bg-gray-50 text-pink-600 px-10 py-5 rounded-full font-bold text-lg transition-all flex items-center justify-center gap-3 shadow-2xl hover:shadow-3xl transform hover:-translate-y-1">
@@ -1825,7 +1803,7 @@ const reviewSchemas = [
         </a>
         <a href="#packages" class="bg-pink-700 hover:bg-pink-800 text-white px-10 py-5 rounded-full font-bold text-lg transition-all flex items-center justify-center gap-3 shadow-2xl hover:shadow-3xl border-2 border-pink-500/50 transform hover:-translate-y-1">
           <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-          Get Package & Price List
+          Get Wedding Car Package & Price List
         </a>
       </div>
     </div>
@@ -1846,9 +1824,9 @@ const reviewSchemas = [
           <h3 class="text-2xl font-bold text-white mb-4 bg-gradient-to-r from-pink-400 to-rose-400 bg-clip-text text-transparent">
             Lahore Blooms
           </h3>
-          <p class="text-base mb-4 text-gray-400">Wedding Room Decoration Lahore</p>
+          <p class="text-base mb-4 text-gray-400">Wedding Car Decoration Lahore</p>
           <p class="text-sm text-gray-400 leading-relaxed">
-            Professional bridal room decoration with fresh flowers, candles, and fairy lights. Serving Lahore with multiple convenient branches.
+            Professional wedding car decoration with fresh flowers, ribbons, bows and fairy lights. Serving Lahore with multiple convenient branches and on-site service.
           </p>
         </div>
         <div>

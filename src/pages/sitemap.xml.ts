@@ -1,6 +1,6 @@
 import { products } from '../data/products';
 
-const siteUrl = 'https://weddingroomdecoration.com';
+const siteUrl = 'https://weddingcardecorations.com';
 
 export async function GET() {
   const pages = [
